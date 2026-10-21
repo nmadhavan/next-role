@@ -1,0 +1,4 @@
+.claude/
+*profile*.json
+*backup*.json
+*tracker*.json

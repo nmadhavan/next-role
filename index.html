@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Next Role</title>
+<meta name="description" content="Plan, check and track a move into a secure government, health or research role in Sydney.">
+<meta name="theme-color" content="#F3F6F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1715" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Young+Serif&display=swap">
+<style>
+/* Layout: phone-first. Top bar with settings, one panel at a time, Android-style bottom navigation. Commute drawn as a rail line. */
+:root{
+  --bg:#F3F6F5; --surface:#FFFFFF; --sunk:#E8EEEC; --ink:#13302B; --muted:#56706A; --line:#D2DDDA;
+  --accent:#0B6873; --accent-ink:#FFFFFF; --accent-soft:#D9EDEE;
+  --good:#1C7443; --good-soft:#DCF0E3; --warn:#8F5600; --warn-soft:#FAEACB; --bad:#AE2A21; --bad-soft:#F7DEDA;
+  --zoneA:#0B6873; --zoneB:#3E8F98; --zoneC:#8CBEC3; --beyond:#B9C4C2;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r:12px; --nav-h:64px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root{
+  --bg:#0D1715; --surface:#14211F; --sunk:#1A2A27; --ink:#E2ECEA; --muted:#93A9A4; --line:#293B38;
+  --accent:#55BAC4; --accent-ink:#062327; --accent-soft:#16363A;
+  --good:#71CF98; --good-soft:#163322; --warn:#EFB45A; --warn-soft:#3A2B12; --bad:#F2887F; --bad-soft:#3C1D1A;
+  --zoneA:#55BAC4; --zoneB:#3C8E97; --zoneC:#2D6066; --beyond:#3A4846;
+  color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--f-display);font-weight:400;font-size:1.3rem;line-height:1.1}
+h2{font-family:var(--f-display);font-weight:400;font-size:1.4rem;line-height:1.2}
+h3{font-size:1rem;font-weight:650;line-height:1.3}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:10px}
+
+/* app bar */
+.appbar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;display:flex;align-items:center;gap:12px}
+.appbar .brand{display:flex;flex-direction:column;flex:1;min-width:0}
+.appbar .brand .eyebrow{font-size:.66rem}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn svg{width:22px;height:22px}
+.iconbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+main{padding:0 16px calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 24px);max-width:1000px;margin:0 auto}
+.section{display:flex;flex-direction:column;gap:14px;padding-block:22px;border-top:1px solid var(--line)}
+.section:first-child{border-top:0}
+.section-head{display:flex;flex-direction:column;gap:6px;max-width:68ch}
+
+/* bottom nav */
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bottomnav .row{display:grid;grid-template-columns:repeat(5,1fr);max-width:640px;margin:0 auto;height:var(--nav-h)}
+.bottomnav button{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:.72rem;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;position:relative;min-width:0}
+.bottomnav button svg{width:24px;height:24px}
+.bottomnav button .ic{display:grid;place-items:center;width:56px;height:30px;border-radius:15px}
+.bottomnav button[aria-selected="true"]{color:var(--ink)}
+.bottomnav button[aria-selected="true"] .ic{background:var(--accent-soft);color:var(--accent)}
+.badge{position:absolute;top:6px;left:calc(50% + 8px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-family:var(--f-mono);font-size:.66rem;display:grid;place-items:center}
+
+/* buttons, inputs */
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 14px;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2;min-height:42px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:7px 11px;font-size:.82rem;min-height:36px}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--bad)}
+.btn[disabled]{opacity:.55;cursor:default}
+.linkrow{display:flex;flex-wrap:wrap;gap:8px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label,.field .lab{font-size:.8rem;color:var(--muted);font-weight:600}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0;width:100%}
+textarea{resize:vertical}
+input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent);flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:.82rem}
+.chip.k{font-family:var(--f-mono);font-size:.74rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.banner{background:var(--accent-soft);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:.92rem}
+.msg{font-size:.9rem;border-radius:10px;padding:10px 12px;background:var(--warn-soft)}
+.msg.ok{background:var(--good-soft)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 14px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:20;max-width:calc(100% - 32px);box-shadow:0 6px 20px rgb(0 0 0 / .18)}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-size:.76rem;font-weight:600;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.info{background:var(--accent-soft);color:var(--accent)}
+.zone{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.74rem;white-space:nowrap;color:var(--muted)}
+.zone i{width:16px;height:4px;border-radius:2px;display:inline-block}
+
+/* plan */
+.bets{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.bet{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.bet .rank{font-family:var(--f-mono);font-size:.72rem;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.bet.planb{background:transparent;border-style:dashed}
+.avoid{background:var(--bad-soft);border-radius:var(--r);padding:12px 14px;font-size:.92rem}
+.avoid b{color:var(--bad)}
+.soon{display:flex;flex-direction:column;gap:8px}
+.soon-item{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.soon-item .t{font-weight:600;min-width:0}
+.rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.seg{padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0;border-right:1px solid var(--line)}
+.seg:last-child{border-right:0;background:var(--sunk)}
+.seg .bar{height:6px;border-radius:3px;position:relative;margin:4px 0 2px 6px}
+.seg .bar::before{content:"";position:absolute;left:-6px;top:50%;width:12px;height:12px;border-radius:50%;transform:translateY(-50%);background:var(--surface);border:3px solid var(--c)}
+.seg .lbl{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.seg ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:3px 10px;font-size:.86rem}
+.seg.beyond ul{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--bad)}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.88rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.now td{background:var(--accent-soft)}
+.risks{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.risk{display:grid;grid-template-columns:110px 200px 1fr;gap:4px 14px;padding:12px 14px;border-bottom:1px solid var(--line);align-items:baseline}
+.risk:last-child{border-bottom:0}
+.risk .who{font-weight:600}
+.risk .why{font-size:.88rem;color:var(--muted);min-width:0}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:32px 1fr;gap:10px}
+ol.steps>li::before{content:counter(s);font-family:var(--f-mono);font-size:.82rem;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:grid;place-items:center}
+ol.steps>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.boards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.board{display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-decoration:none;color:var(--ink);min-width:0}
+.board b{color:var(--accent);font-size:.92rem}
+.board span{font-size:.82rem;color:var(--muted)}
+.sources{font-size:.82rem;color:var(--muted)}
+.sources ul{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+
+/* titles */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;font-size:.9rem}
+.toolbar label{display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tcard .hd{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tcard dl{margin:0;display:grid;grid-template-columns:84px 1fr;gap:6px 12px;font-size:.88rem}
+.tcard dt{color:var(--muted);font-size:.78rem;font-weight:600;padding-top:1px}
+.tcard dd{margin:0;min-width:0}
+.tcard .live{font-size:.85rem;background:var(--good-soft);border-radius:8px;padding:7px 10px}
+.q{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);word-break:break-word}
+.skips{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.skip{border:1px dashed var(--line);border-radius:var(--r);padding:12px 14px;font-size:.9rem;display:flex;flex-direction:column;gap:4px}
+.skip b{color:var(--bad)}
+
+/* employers */
+.segbtns{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.segbtns button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font:inherit;font-size:.83rem;cursor:pointer;white-space:nowrap;flex:none}
+.segbtns button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.segbtns button[disabled]{opacity:.5}
+.emps{display:flex;flex-direction:column;gap:8px}
+.emp{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.emp .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.emp .n{font-weight:650}
+.emp .meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:.84rem;color:var(--muted)}
+.emp .t{font-size:.88rem}
+.emp .nt{color:var(--muted);font-size:.84rem}
+.emp .hot{color:var(--good);font-weight:600;font-size:.84rem}
+.empty{padding:22px 16px;color:var(--muted);text-align:center;background:var(--surface);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* check */
+#c-ad{min-height:220px;font-size:15px}
+.score{display:flex;gap:14px;align-items:center}
+.dial{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:1.3rem;font-weight:500;flex:none}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.checks li{display:grid;grid-template-columns:18px 1fr;gap:4px 10px;align-items:baseline;font-size:.9rem}
+.checks .dot{width:12px;height:12px;border-radius:50%;display:inline-block;transform:translateY(1px)}
+.checks .cn{font-weight:600}
+.checks .cnote{grid-column:2;color:var(--muted)}
+.dot.pass{background:var(--good)} .dot.warn{background:var(--warn)} .dot.fail{background:var(--bad)}
+ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.9rem}
+
+/* tracker */
+.tgroup{display:flex;flex-direction:column;gap:8px}
+.tgroup h3{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;justify-content:space-between;padding:0 2px}
+.tgrid{display:grid;grid-template-columns:1fr;gap:16px}
+.job{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.job .jt{font-weight:650;line-height:1.3;word-break:break-word}
+.job .jt a{color:var(--ink);text-decoration-color:var(--line)}
+.job .je{font-size:.86rem;color:var(--muted)}
+.job .jp{font-family:var(--f-mono);font-size:.76rem}
+.job .jn{font-size:.86rem;white-space:pre-wrap;word-break:break-word}
+.job .jrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.job .jrow select{width:auto;flex:1 1 150px;font-size:15px;padding:7px 10px}
+.job .src{font-size:.74rem;color:var(--muted)}
+.colempty{font-size:.84rem;color:var(--muted);padding:2px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.formgrid .full{grid-column:1/-1}
+.zonegrid{display:grid;grid-template-columns:1fr 120px;gap:8px 12px;align-items:center;font-size:.9rem}
+.zonegrid select{padding:7px 10px}
+details>summary{cursor:pointer;font-weight:600}
+
+@media (min-width:900px){
+  .tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  h1{font-size:1.5rem}
+}
+@media (max-width:760px){
+  .grid2{grid-template-columns:1fr}
+  .rail{grid-template-columns:1fr 1fr}
+  .seg:nth-child(2){border-right:0}
+  .seg:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .risk{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .rail{grid-template-columns:1fr}
+  .seg{border-right:0;border-bottom:1px solid var(--line)}
+  .tcard dl{grid-template-columns:1fr}
+  .formgrid{grid-template-columns:1fr}
+  .zonegrid{grid-template-columns:1fr 110px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="brand"><span class="eyebrow" id="bar-eyebrow">Job search</span><h1 id="bar-title">Next Role</h1></div>
+  <button class="iconbtn" id="open-settings" aria-label="Settings" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+  </button>
+</header>
+
+<main>
+<!-- PLAN -->
+<section id="panel-plan" aria-label="Plan">
+  <div class="section">
+    <div class="banner" id="setup-banner" hidden>
+      <b>Finish setting up</b>
+      <span>Import your profile file (sent to you separately) to see your pay comparison, commute zones and saved roles. Everything stays on this phone.</span>
+      <div class="linkrow"><button class="btn primary small" data-goto="settings">Open settings</button></div>
+    </div>
+    <div class="banner" id="install-banner" hidden>
+      <b>Install Next Role on this phone</b>
+      <span>It gets its own icon and works offline.</span>
+      <div class="linkrow"><button class="btn primary small" id="install-btn">Install app</button></div>
+    </div>
+    <div class="chips" id="plan-chips"></div>
+    <div class="section-head"><span class="eyebrow">Recommendation</span><h2>Where to look first</h2></div>
+    <div class="bets">
+      <div class="bet"><span class="rank">Best bet 1</span><h3>NSW Health non-clinical manager roles</h3>
+        <p class="small">Permanent, low layoff risk, and Health Manager Level 4 pays $153.6k–$183k plus salary packaging.</p>
+        <p class="small muted">Ministry of Health (St Leonards) · SESLHD (St George Hospital, Kogarah) · Sydney LHD</p></div>
+      <div class="bet"><span class="rank">Best bet 2</span><h3>Federal health agencies in the CBD, at EL2</h3>
+        <p class="small">15.4% super, strong rights to work from home, and ongoing APS roles are rarely cut.</p>
+        <p class="small muted">IHACPA · Safety and Quality Commission · Digital Health Agency</p></div>
+      <div class="bet"><span class="rank">Best bet 3</span><h3>Health bodies in the inner south</h3>
+        <p class="small">Government-funded work in blood donor planning, primary health commissioning and nuclear medicine, all using catchments, targets and CRM.</p>
+        <p class="small muted">Lifeblood (Alexandria) · CESPHN (Mascot) · ANSTO (Lucas Heights)</p></div>
+      <div class="bet planb"><span class="rank">Plan B</span><h3>Commercial excellence in pharma and medtech</h3>
+        <p class="small">The same job, highest pay with a bonus, medium layoff risk.</p>
+        <p class="small muted">Mostly Macquarie Park and North Sydney</p></div>
+    </div>
+    <p class="avoid"><b>Avoid for now:</b> universities and CSIRO are in the middle of job cuts, and medical research institutes mostly hire on fixed-term grant funding.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">From your tracker</span><h2>Closing in the next 14 days</h2></div>
+    <div class="soon" id="soon-list"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="eyebrow" id="rail-eyebrow">Commute</span><h2>Your commute zones</h2>
+      <p class="muted small">Rough peak-hour public transport times. Change them in Settings.</p></div>
+    <div id="rail"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Pay</span><h2>Which grades keep your package whole</h2>
+      <p class="muted small">Package means base plus bonus plus employer super, so a pharma bonus is compared like for like. Government ads show the classification: search by it to filter on pay.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Classification</th><th>Base salary</th><th>Super</th><th>Package</th><th>Compared with now</th></tr></thead>
+      <tbody id="pay-rows"></tbody></table></div>
+    <p class="small muted">From live I Work for NSW ads (Oct 2026) and the APSC agreement rates from March 2026. Hours: NSW departments 35 a week, NSW Health 38, APS 37.5. <sup>*</sup>NSW Health staff can salary-package about $9,000 a year tax-free, worth roughly $3k–$4k in take-home pay.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Layoff risk · Oct 2026</span><h2>How safe each sector looks</h2></div>
+    <div class="risks">
+      <div class="risk"><span><span class="pill good">Low</span></span><span class="who">Federal agencies (APS, ongoing)</span><span class="why">Ongoing APS roles are rarely made redundant. Pay rose 3.4% in March 2026 and agreements run to February 2027. Staff can request to work from home with no cap on days.</span></div>
+      <div class="risk"><span><span class="pill good">Low</span></span><span class="who">NSW Health, non-clinical</span><span class="why">NSW cuts have mostly hit contractors (more than 9,000 contractor roles since 2023), not permanent staff. Expect a set number of office days.</span></div>
+      <div class="risk"><span><span class="pill good">Low</span></span><span class="who">Local councils</span><span class="why">Very stable, with a 35-hour week and often a 9-day fortnight. Senior data roles are few and pay less.</span></div>
+      <div class="risk"><span><span class="pill warn">Low–medium</span></span><span class="who">NSW departments</span><span class="why">Ongoing roles are mostly safe, but Transport for NSW (950), WaterNSW (300) and DPIRD (170) announced cuts in Aug 2025, and Service NSW used spill-and-fill. A 2024 circular makes working mainly in the office the default.</span></div>
+      <div class="risk"><span><span class="pill warn">Low–medium</span></span><span class="who">Lifeblood, ANSTO</span><span class="why">Government-funded. No ANSTO cuts showed up in 2025–26 reporting, and recent Lifeblood ads are permanent.</span></div>
+      <div class="risk"><span><span class="pill warn">Medium</span></span><span class="who">Primary Health Networks</span><span class="why">Funded through federal contract cycles. Many roles are permanent, but check each ad.</span></div>
+      <div class="risk"><span><span class="pill warn">Medium</span></span><span class="who">Pharma and medtech</span><span class="why">The best pay. Restructures follow global strategy changes.</span></div>
+      <div class="risk"><span><span class="pill bad">Medium–high</span></span><span class="who">Universities</span><span class="why">UTS is cutting 134 full-time jobs and 1,000+ subjects from 2026, Macquarie cut 75+ jobs in 2025, and Western Sydney plans up to 400 cuts.</span></div>
+      <div class="risk"><span><span class="pill bad">High</span></span><span class="who">CSIRO, research institutes</span><span class="why">CSIRO has cut 818–1,150 roles since 2024 and announced up to 350 more in Nov 2025. Research institute roles are usually fixed-term and grant-funded.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Method</span><h2>How to search, in order</h2></div>
+    <ol class="steps">
+      <li><div><h3>Set daily email alerts on these boards</h3>
+        <p class="small muted">NSW Health jobs rarely appear on Seek, so the government boards matter most.</p>
+        <div class="boards">
+          <a class="board" href="https://iworkfor.nsw.gov.au/" target="_blank" rel="noopener"><b>I Work for NSW</b><span>All NSW agencies, many LHD roles. Save a search to get email alerts.</span></a>
+          <a class="board" href="https://jobs.health.nsw.gov.au/" target="_blank" rel="noopener"><b>NSW Health Careers</b><span>Every LHD and the Ministry. Set job alerts by keyword.</span></a>
+          <a class="board" href="https://www.apsjobs.gov.au/" target="_blank" rel="noopener"><b>APSJobs</b><span>Federal agencies. Filter the location to Sydney.</span></a>
+          <a class="board" href="https://www.seek.com.au/" target="_blank" rel="noopener"><b>Seek</b><span>Pharma, medtech, insurers, NFPs. Save each title search.</span></a>
+          <a class="board" href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener"><b>LinkedIn Jobs</b><span>Same, plus recruiters. Turn on Open to Work for recruiters only.</span></a>
+          <a class="board" href="https://careers.lifeblood.com.au/" target="_blank" rel="noopener"><b>Lifeblood careers</b><span>Alexandria roles. They don't use agencies.</span></a>
+          <a class="board" href="https://careers.ansto.gov.au/" target="_blank" rel="noopener"><b>ANSTO careers</b><span>Lucas Heights. Filter by business and commercial.</span></a>
+          <a class="board" href="https://www.careersatcouncil.com.au/" target="_blank" rel="noopener"><b>Careers at Council</b><span>Georges River, Bayside, Sutherland Shire and more.</span></a>
+          <a class="board" href="https://www.ethicaljobs.com.au/" target="_blank" rel="noopener"><b>EthicalJobs</b><span>PHNs, charities and health not-for-profits.</span></a>
+        </div></div></li>
+      <li><div><h3>Search by classification as well as title</h3>
+        <p class="small">Searching <span class="mono">Grade 11/12</span>, <span class="mono">Health Manager Level 4</span> or <span class="mono">EL2</span> together with words like data, performance or insights finds roles at the right pay with unfamiliar titles. The Titles tab has one-tap searches.</p></div></li>
+      <li><div><h3>Read the work type first</h3>
+        <p class="small">Apply where the ad says <b>Permanent</b> or <b>Ongoing</b>. Skip <b>Temporary</b>, <b>Contract</b>, <b>Fixed term</b> and <b>Grant funded</b> unless the ad says the role can convert. Government talent pools are fine: one application can lead to several offers over 12–18 months.</p></div></li>
+      <li><div><h3>Share ads into this app</h3>
+        <p class="small">In Seek, LinkedIn or Chrome, tap Share and choose Next Role. The Check tab scores the ad against your criteria, and you can save it to the tracker.</p></div></li>
+      <li><div><h3>Write for government selection</h3>
+        <p class="small">NSW ads assess against the NSW Public Sector Capability Framework and usually ask 2–3 targeted questions. APS ads want a short pitch. Answer with numbers: territories designed, target attainment, incentive outcomes, pipeline and CRM adoption.</p></div></li>
+      <li><div><h3>Check paid parental leave timing</h3>
+        <p class="small">NSW public sector staff get 14 weeks paid parental leave (2 more if partners share). The 2021 policy required 40 weeks of continuous service before the birth. APS agreements are moving to 18 weeks. If you're planning a baby, compare dates with your current employer's policy before moving.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="section sources">
+    <span class="eyebrow">Sources</span>
+    <ul>
+      <li><a href="https://iworkfor.nsw.gov.au/job/manager-analytics-and-improvement-603890" target="_blank" rel="noopener">Ministry of Health ad (HM4 pay)</a></li>
+      <li><a href="https://iworkfor.nsw.gov.au/job/manager-data-analytics-clerk-grade-11-12-606207" target="_blank" rel="noopener">NSW Ombudsman ad (Grade 11/12 pay)</a></li>
+      <li><a href="https://fairworkmate.com.au/public-sector-pay/nsw-public-service-clerk-salaries" target="_blank" rel="noopener">NSW clerk grade rates</a> · <a href="https://fairworkmate.com.au/public-sector-pay/aps-pay-scales" target="_blank" rel="noopener">APS pay scales</a></li>
+      <li><a href="https://arp.nsw.gov.au/c2024-03-nsw-government-sector-workplace-presence" target="_blank" rel="noopener">NSW workplace presence circular C2024-03</a></li>
+      <li><a href="https://www.themandarin.com.au/?p=306852" target="_blank" rel="noopener">NSW contractor cuts</a> · <a href="https://psa.asn.au/history/nsw-government-announces-job-cuts-sector-wide/" target="_blank" rel="noopener">NSW agency cuts</a></li>
+      <li><a href="https://cityhub.com.au/uts-axes-1110-subjects-and-134-full-time-jobs-as-mass-cuts-begin/" target="_blank" rel="noopener">UTS cuts</a> · <a href="https://nsw.nteu.au/news/macquarie-universitys-brutal-cuts-plan-scraps-key-courses-and-jobs/" target="_blank" rel="noopener">Macquarie cuts</a> · <a href="https://cityhub.com.au/wsu-plans-to-cut-400-jobs-in-response-to-79-million-deficit/" target="_blank" rel="noopener">WSU cuts</a></li>
+      <li><a href="https://www.indailysa.com.au/news/just-in/2026/07/29/csiro-chief-defends-job-cuts-as-sa-pain-continues" target="_blank" rel="noopener">CSIRO cuts</a></li>
+      <li><a href="https://www.nsw.gov.au/nsw-government/equity-and-diversity/gender-equity/paid-parental-leave" target="_blank" rel="noopener">NSW paid parental leave</a> · <a href="https://www.apsc.gov.au/node/2312" target="_blank" rel="noopener">APS parental leave</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TITLES -->
+<section id="panel-titles" aria-label="Job titles" hidden>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Search terms</span><h2>Job titles to search</h2>
+      <p class="muted small">Your five picks, then six titles government and health employers use for the same work. Each button opens a live Sydney search.</p></div>
+    <div class="toolbar">
+      <label><input type="checkbox" id="opt-ft" checked> Full-time only</label>
+      <label><input type="checkbox" id="opt-recent"> Last 14 days</label>
+    </div>
+    <span class="eyebrow">Your picks</span>
+    <div class="grid2" id="titles-picks"></div>
+    <span class="eyebrow">Also search: same work, government names</span>
+    <div class="grid2" id="titles-more"></div>
+  </div>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Filter out</span><h2>Skip or be careful</h2></div>
+    <div class="skips">
+      <div class="skip"><b>Data Analyst, Reporting Analyst, BI Developer</b><span>Building reports to order is the work AI tools and offshore teams take over first, and the pay is a grade lower.</span></div>
+      <div class="skip"><b>Clinical Informatics, Health Information Manager, Clinical Coder</b><span>These usually need a clinical registration or an HIM degree.</span></div>
+      <div class="skip"><b>Temporary, Contract, Fixed term, Grant funded</b><span>Fails the permanence test even when well paid.</span></div>
+      <div class="skip"><b>Key Account Manager, Area Sales Manager</b><span>Field sales with travel. This works against family time.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPLOYERS -->
+<section id="panel-employers" aria-label="Employers" hidden>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Target list</span><h2>Employers worth watching</h2>
+      <p class="muted small">Locations and risk ratings from public sources, Oct 2026.</p></div>
+    <div class="segbtns" id="f-sector" aria-label="Sector"></div>
+    <div class="segbtns" id="f-zone" aria-label="Commute">
+      <button data-z="A" aria-pressed="false">Zone A only</button>
+      <button data-z="B" aria-pressed="false">Up to zone B</button>
+      <button data-z="C" aria-pressed="true">Up to zone C</button>
+      <button data-z="all" aria-pressed="false">Any distance</button>
+    </div>
+    <div class="toolbar"><label><input type="checkbox" id="f-safe"> Hide high layoff risk</label><span class="small muted" id="emp-count"></span></div>
+    <div class="emps" id="emp-list"></div>
+  </div>
+</section>
+
+<!-- CHECK -->
+<section id="panel-check" aria-label="Check an ad" hidden>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Ad checker</span><h2>Does this ad fit?</h2>
+      <p class="muted small">Paste or share a job ad. The check runs on the phone, works offline and needs no account.</p></div>
+    <div class="banner" id="shared-banner" hidden></div>
+    <div class="card">
+      <div class="field"><label for="c-ad">Job ad text</label>
+        <textarea id="c-ad" placeholder="Paste the full ad: title, employer, classification, salary, location, work type and the role description."></textarea></div>
+      <div class="field"><label for="c-link">Link to the ad (optional)</label><input id="c-link" type="url" inputmode="url" placeholder="https://…"></div>
+      <div class="linkrow">
+        <button class="btn primary" id="c-run">Check this ad</button>
+        <button class="btn ghost" id="c-clear">Clear</button>
+        <button class="btn ghost" id="c-example">Example ad</button>
+      </div>
+    </div>
+    <div class="card" id="c-out" aria-live="polite">
+      <p class="muted">The result shows here: a fit score, a pass or warning for each criterion, and what to do next.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKER -->
+<section id="panel-tracker" aria-label="Tracker" hidden>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Tracker · saved on this phone</span><h2>Applications</h2></div>
+    <div class="linkrow">
+      <button class="btn primary" id="t-add">Add a role</button>
+      <button class="btn" id="t-share">Share list</button>
+      <button class="btn" id="t-export">Send tracker file</button>
+      <label class="btn ghost" for="t-import">Import file</label>
+      <input type="file" id="t-import" accept=".json,application/json" hidden>
+    </div>
+    <form class="card" id="t-form" autocomplete="off" hidden>
+      <h3 id="t-form-title">Add a role</h3>
+      <input type="hidden" id="f-id">
+      <div class="formgrid">
+        <div class="field full"><label for="f-title">Job title</label><input id="f-title" required></div>
+        <div class="field full"><label for="f-employer">Employer</label><input id="f-employer" required></div>
+        <div class="field"><label for="f-location">Location</label><input id="f-location"></div>
+        <div class="field"><label for="f-pay">Grade or pay</label><input id="f-pay"></div>
+        <div class="field full"><label for="f-link">Link</label><input id="f-link" type="url" inputmode="url"></div>
+        <div class="field"><label for="f-closing">Closes</label><input id="f-closing" type="date"></div>
+        <div class="field"><label for="f-status">Status</label><select id="f-status"></select></div>
+        <div class="field full"><label for="f-notes">Notes</label><textarea id="f-notes" rows="3" placeholder="Permanent? Office days? Who to contact?"></textarea></div>
+      </div>
+      <div class="linkrow"><button class="btn primary" type="submit" id="f-submit">Save</button><button class="btn ghost" type="button" id="f-cancel">Cancel</button></div>
+    </form>
+    <div id="t-board"></div>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section id="panel-settings" aria-label="Settings" hidden>
+  <div class="section">
+    <div class="section-head"><span class="eyebrow">Settings</span><h2>Your profile</h2>
+      <p class="muted small">Stored only on this phone. Nothing is sent anywhere.</p></div>
+    <div class="card">
+      <h3>Import a profile or tracker file</h3>
+      <p class="small muted">Choose the file you were sent. Profile, tracker and backup files all work, and imported roles merge with any you already have.</p>
+      <div class="linkrow"><label class="btn primary" for="s-import">Choose file</label><input type="file" id="s-import" accept=".json,application/json" hidden></div>
+      <details><summary class="small">Or paste the file's text</summary>
+        <div class="stack" style="margin-top:8px"><textarea id="s-paste" rows="4" placeholder='{"kind":"next-role-profile", …}'></textarea><div class="linkrow"><button class="btn small" id="s-paste-go">Import pasted text</button></div></div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>Pay now</h3>
+      <div class="formgrid">
+        <div class="field full"><label for="s-base">Base salary</label><input id="s-base" type="number" inputmode="numeric" step="1000"></div>
+        <div class="field"><label for="s-bonus">Usual bonus %</label><input id="s-bonus" type="number" inputmode="decimal" step="1"></div>
+        <div class="field"><label for="s-super">Super %</label><input id="s-super" type="number" inputmode="decimal" step="0.5"></div>
+      </div>
+      <p class="small muted" id="s-package"></p>
+    </div>
+    <div class="card">
+      <h3>Home and commute zones</h3>
+      <div class="field"><label for="s-home">Home suburb</label><input id="s-home"></div>
+      <details><summary class="small">Edit zones by area</summary>
+        <div class="zonegrid" id="s-zones" style="margin-top:10px"></div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>About you</h3>
+      <p class="small muted">Used when you ask an AI chat app for a deeper check of an ad.</p>
+      <textarea id="s-about" rows="5"></textarea>
+    </div>
+    <div class="card">
+      <h3>Backup</h3>
+      <div class="linkrow"><button class="btn" id="s-backup">Save a backup file</button><button class="btn" id="s-install" hidden>Install app</button></div>
+      <div id="s-clear-wrap"><button class="btn ghost danger" id="s-clear">Clear all data on this phone</button></div>
+    </div>
+    <p class="small muted">Next Role · version 1 · works offline</p>
+  </div>
+</section>
+</main>
+
+<nav class="bottomnav" aria-label="Sections">
+  <div class="row" role="tablist">
+    <button role="tab" id="tab-plan" data-tab="plan"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span>Plan</button>
+    <button role="tab" id="tab-titles" data-tab="titles"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>Titles</button>
+    <button role="tab" id="tab-employers" data-tab="employers"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7.5h2M13 7.5h2M9 11.5h2M13 11.5h2M10 21v-4h4v4"/></svg></span>Employers</button>
+    <button role="tab" id="tab-check" data-tab="check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 13l2 2 4-4"/></svg></span>Check</button>
+    <button role="tab" id="tab-tracker" data-tab="tracker"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="4" height="13" rx="1"/></svg></span>Tracker<span class="badge" id="t-badge" hidden>0</span></button>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const enc = encodeURIComponent;
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } },
+  del(k){ try { localStorage.removeItem(k); } catch {} }
+};
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+let toastTimer;
+function toast(text){ const t = $('#toast'); t.textContent = text; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600); }
+function daysUntil(iso){
+  if(!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+  const [y, m, d] = iso.split('-').map(Number);
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  return Math.round((new Date(y, m - 1, d) - t) / 86400000);
+}
+function closingPill(iso){
+  const n = daysUntil(iso);
+  if(n === null) return '';
+  if(n < 0) return '<span class="pill bad">Closed</span>';
+  if(n === 0) return '<span class="pill bad">Closes today</span>';
+  if(n === 1) return '<span class="pill bad">Closes tomorrow</span>';
+  if(n <= 7) return `<span class="pill warn">Closes in ${n} days</span>`;
+  return `<span class="pill info">Closes ${esc(iso)}</span>`;
+}
+const safeUrl = u => /^https?:\/\//i.test(String(u || '')) ? String(u) : '';
+
+/* ---------------- data ---------------- */
+const AREAS = {
+  kogarah:['Kogarah',['kogarah']], hurstville:['Hurstville',['hurstville']], rockdale:['Rockdale / Wolli Creek',['rockdale','arncliffe','wolli creek','banksia']],
+  mascot:['Mascot',['mascot','sydney airport','botany']], alexandria:['Alexandria / Green Square',['alexandria','green square','zetland','waterloo']],
+  redfern:['Redfern / Eveleigh',['redfern','eveleigh','australian technology park']], cbdsouth:['Central / Haymarket / Town Hall',['haymarket','central station','town hall','surry hills','chippendale']],
+  ultimo:['Ultimo / Pyrmont',['ultimo','pyrmont','broadway']], sutherland:['Sutherland / Caringbah',['sutherland','caringbah','miranda','kirrawee','taren point']],
+  lucasheights:['Lucas Heights (car)',['lucas heights']],
+  cbd:['Sydney CBD / Martin Place / Barangaroo',['sydney cbd','sydney city','cbd','martin place','barangaroo','millers point','circular quay','wynyard','sydney nsw 2000','sydney 2000']],
+  camperdown:['Camperdown / Newtown',['camperdown','newtown','glebe','darlington','royal prince alfred']],
+  randwick:['Randwick / Kensington',['randwick','kensington','coogee']], darlinghurst:['Darlinghurst / Woolloomooloo',['darlinghurst','woolloomooloo','east sydney','paddington']],
+  northsydney:['North Sydney',['north sydney','milsons point']], stleonards:['St Leonards / Crows Nest',['st leonards','st. leonards','crows nest','royal north shore','reserve road']],
+  chatswood:['Chatswood',['chatswood','artarmon']], macquariepark:['Macquarie Park / North Ryde',['macquarie park','north ryde','macquarie university','ryde']],
+  olympicpark:['Olympic Park / Rhodes',['olympic park','rhodes','homebush','concord']], lindfield:['Lindfield / Pymble',['lindfield','pymble','gordon','hornsby']],
+  parramatta:['Parramatta',['parramatta','rydalmere']], westmead:['Westmead',['westmead']], bellavista:['Bella Vista / Norwest',['bella vista','norwest','baulkham hills','castle hill']],
+  liverpool:['Liverpool / Campbelltown',['liverpool','campbelltown','ingleburn']], penrith:['Penrith',['penrith','kingswood','nepean']]
+};
+const ZONE_NAMES = {A:['Zone A','up to 30 min','var(--zoneA)'], B:['Zone B','30–45 min','var(--zoneB)'], C:['Zone C','45–60 min','var(--zoneC)'], X:['Beyond','60+ min','var(--beyond)']};
+const GRADES = [
+  {name:'NSW Clerk Grade 9/10', who:'NSW departments', lo:133348, hi:146945, sup:12, re:/grade\s*9|grade\s*10\b/i},
+  {name:'NSW Clerk Grade 11/12', who:'NSW departments', lo:154231, hi:178369, sup:12, re:/grade\s*11|grade\s*12\b/i},
+  {name:'Health Manager Level 3', who:'NSW Health', lo:137525, hi:156231, sup:12, pk:true, re:/health\s*manager\s*(level|lvl)\s*3|\bHM\s?3\b/i},
+  {name:'Health Manager Level 4', who:'NSW Health', lo:153559, hi:182954, sup:12, pk:true, re:/health\s*manager\s*(level|lvl)\s*4|\bHM\s?4\b/i},
+  {name:'APS EL1', who:'Federal (APSC rates)', lo:123996, hi:142116, sup:15.4, re:/\bEL\s?1\b|executive level 1\b/i},
+  {name:'APS EL2', who:'Federal (APSC rates; ATO to $185.7k)', lo:155479, hi:174790, sup:15.4, re:/\bEL\s?2\b|executive level 2\b/i}
+];
+const TITLES = [
+  {pick:true, title:'Principal Business Analyst', q:'"principal business analyst" OR "lead business analyst"', gov:'business analyst',
+   fit:'Connects data pipelines (PySpark, Dynamics CRM) with business strategy. At Principal or Lead level you own the problem, not the report.',
+   watch:'In government many BA roles are short project contracts. Apply only where the ad says ongoing or permanent.',
+   where:'UNSW, eHealth NSW, Transport for NSW, Lifeblood, insurers', grade:'Grade 11/12 · HM4 · EL2', ai:'Medium–high'},
+  {pick:true, title:'Commercial Excellence Manager / Lead', q:'"commercial excellence" OR "sales force effectiveness" OR "commercial effectiveness" OR "incentive compensation"', gov:'commercial',
+   fit:'A direct lateral move. Designing territories, targets and incentives takes judgement, so people keep that work.',
+   watch:'Almost all are in pharma and medtech, which pay best but restructure when global strategy shifts. Government rarely uses this title.',
+   where:'Abbott, Galderma, Novo Nordisk, AbbVie, Roche', grade:'Private: base + bonus', ai:'High'},
+  {pick:true, title:'Business Intelligence Manager / Lead', q:'"business intelligence manager" OR "BI manager" OR "BI lead" OR "head of business intelligence" OR "reporting and analytics manager"', gov:'business intelligence',
+   fit:'Owns the Power BI platform, the data model and the reporting team rather than building each dashboard.',
+   watch:'“BI Developer” ads are build roles at analyst pay. Look for Manager, Lead or Head.',
+   where:'LHDs, Ministry of Health, City of Sydney, HCF, icare', grade:'HM4 · Grade 11/12 · EL2', ai:'Medium'},
+  {pick:true, title:'Health Informatics Lead', q:'"health informatics" OR "informatics lead" OR "data governance and quality"', gov:'informatics',
+   fit:'Patient catchments, clinical data pipelines and data quality in LHDs and research bodies.',
+   watch:'“Clinical informatics” usually needs a clinical registration and “Health Information Manager” needs an HIM degree. Non-clinical versions use titles like Manager, Data Governance and Quality.',
+   where:'SESLHD, Sydney LHD, eHealth NSW, Cancer Institute NSW', grade:'HM4', ai:'High',
+   live:'These are rarely on Seek. Use NSW Health Careers and I Work for NSW.'},
+  {pick:true, title:'Analytics Manager', q:'"analytics manager" OR "insights manager" OR "manager, data analytics" OR "data and insights lead"', gov:'analytics',
+   fit:'Enterprise CRM integration and master data experience, at manager level.',
+   watch:'Check the team size. A “manager” with no direct reports and a queue of requests is an analyst job with a better title.',
+   where:'NSW Ombudsman, Ministry of Health, Lifeblood, icare', grade:'Grade 11/12 · HM4 · EL2', ai:'Medium–high'},
+  {title:'Performance & Analytics Manager (health)', q:'"analytics and improvement" OR "performance and analytics" OR "performance unit" health', gov:'performance',
+   fit:'LHD performance units set activity targets, track them and work through gaps with hospital managers. This is target-setting in a public system.',
+   watch:'Some “Performance” titles mean HR performance management. Check the description.',
+   where:'Ministry of Health, SESLHD, Sydney LHD', grade:'HM4', ai:'High'},
+  {title:'Health Service Planner', q:'"health service planner" OR "health planning" OR "service planning manager"', gov:'planning',
+   fit:'Catchment, population and demand modelling to decide where services go. Very close to territory and catchment work.',
+   watch:'Senior planner roles sometimes prefer a public health degree. Catchment work counts as relevant experience.',
+   where:'LHDs, Ministry of Health, CESPHN', grade:'HM3–HM4', ai:'High'},
+  {title:'Activity Based Funding / Funding & Performance Manager', q:'"activity based funding" OR "ABF manager" OR "funding and performance"', gov:'activity based funding',
+   fit:'Hospitals are paid by activity. ABF teams model price, volume and targets, much like incentive modelling.',
+   watch:'Expect to learn clinical costing terms quickly. The analytical approach transfers directly.',
+   where:'IHACPA, Ministry of Health, LHDs', grade:'HM3–HM4 · EL1–EL2', ai:'Medium–high'},
+  {title:'Data Governance / Master Data Manager', q:'"data governance manager" OR "master data manager" OR "data quality manager"', gov:'data governance',
+   fit:'Uses MDM and CRM integration experience. Governance needs judgement and authority, which is hard to automate.',
+   watch:'Make sure the role sets policy rather than working through a data-cleaning backlog.',
+   where:'NSW Health, Transport, councils, insurers', grade:'HM4 · Grade 11/12', ai:'High'},
+  {title:'CRM Manager / CRM Product Owner', q:'"CRM manager" OR "CRM lead" OR "CRM product owner" OR "Dynamics 365"', gov:'CRM',
+   fit:'Lifeblood, universities, councils and Service NSW run donor, student and customer CRMs on Dynamics or Salesforce.',
+   watch:'Government product owner roles are often project-funded. Check permanence.',
+   where:'Lifeblood, UNSW, Cancer Council NSW, City of Sydney', grade:'Varies', ai:'Medium–high'},
+  {title:'Strategy & Performance / Business Performance Manager', q:'"strategy and performance" OR "business performance manager" OR "insights lead"', gov:'strategy and performance',
+   fit:'Corporate planning and KPI frameworks for a whole agency or council.',
+   watch:'Council versions pay less, but the hours are excellent.',
+   where:'Councils, NSW Treasury, icare', grade:'Grade 11/12', ai:'High'}
+];
+const SECTORS = {health:'NSW Health', nsw:'NSW Government', fed:'Federal', nfp:'Health not-for-profit', council:'Councils', uni:'Universities & research', private:'Pharma & private'};
+const RISK = {low:['good','Low'], lowmed:['warn','Low–medium'], med:['warn','Medium'], high:['bad','High']};
+const EMPLOYERS = [
+  {id:'moh', n:'NSW Ministry of Health', s:'health', a:'St Leonards', ak:['stleonards'], r:'low', t:'System purchasing, performance, analytics and improvement, ABF', hot:'Seen hiring (Oct 2026): Manager, Analytics and Improvement, HM4.'},
+  {id:'seslhd', n:'South Eastern Sydney LHD', s:'health', a:'Kogarah (St George Hospital), Sutherland, Randwick', ak:['kogarah','sutherland','randwick'], r:'low', t:'Performance unit, BI, revenue, service planning'},
+  {id:'slhd', n:'Sydney LHD', s:'health', a:'Camperdown (RPA)', ak:['camperdown'], r:'low', t:'BI, performance, planning, ABF'},
+  {id:'nslhd', n:'Northern Sydney LHD', s:'health', a:'St Leonards (Royal North Shore)', ak:['stleonards'], r:'low', t:'BI, data analytics, performance'},
+  {id:'aci', n:'Agency for Clinical Innovation', s:'health', a:'St Leonards', ak:['stleonards'], r:'low', t:'Analytics, health economics, evaluation'},
+  {id:'cinsw', n:'Cancer Institute NSW', s:'health', a:'St Leonards', ak:['stleonards'], r:'low', t:'Data and analytics, registry, performance'},
+  {id:'bhi', n:'Bureau of Health Information', s:'health', a:'St Leonards', ak:['stleonards'], r:'low', t:'Performance reporting and analysis'},
+  {id:'ehealth', n:'eHealth NSW', s:'health', a:'North Shore (Chatswood area)', ak:['chatswood'], r:'lowmed', t:'Data platforms, product owner, informatics'},
+  {id:'healthshare', n:'HealthShare NSW', s:'health', a:'North Shore (Chatswood area)', ak:['chatswood'], r:'low', t:'Procurement performance, commercial, demand planning', note:'Procurement is the most commercial part of NSW Health.'},
+  {id:'schn', n:'Sydney Children’s Hospitals Network', s:'health', a:'Randwick', ak:['randwick'], r:'low', t:'BI, performance, revenue'},
+  {id:'ombudsman', n:'NSW Ombudsman', s:'nsw', a:'Sydney CBD', ak:['cbd'], r:'low', t:'Data analytics, strategy and governance', hot:'Seen hiring (Oct 2026): Manager, Data Analytics, Grade 11/12.'},
+  {id:'treasury', n:'NSW Treasury', s:'nsw', a:'Martin Place', ak:['cbd'], r:'lowmed', t:'Performance and analytics, commercial policy'},
+  {id:'dcs', n:'Department of Customer Service', s:'nsw', a:'Haymarket & Parramatta', ak:['cbdsouth','parramatta'], r:'med', t:'Insights, CRM, data, customer experience', note:'Service NSW cut roles. Choose Haymarket-based roles.'},
+  {id:'tfnsw', n:'Transport for NSW', s:'nsw', a:'Sydney CBD & Macquarie Park', ak:['cbd','macquariepark'], r:'med', t:'Revenue and pricing, insights, network performance', note:'Announced 950 job cuts in Aug 2025.'},
+  {id:'ipart', n:'IPART', s:'nsw', a:'Haymarket', ak:['cbdsouth'], r:'low', t:'Pricing and regulatory analysis', note:'Small and economist-heavy. Pricing experience helps.'},
+  {id:'icare', n:'icare', s:'nsw', a:'Sydney CBD', ak:['cbd'], r:'med', t:'Performance, provider and claims analytics, commercial'},
+  {id:'ihacpa', n:'IHACPA (hospital pricing authority)', s:'fed', a:'Sydney CBD', ak:['cbd'], r:'low', t:'Hospital pricing, ABF, costing, data', note:'Sets national hospital prices. Pricing and incentive work maps well.'},
+  {id:'acsqhc', n:'Australian Commission on Safety and Quality in Health Care', s:'fed', a:'Sydney CBD', ak:['cbd'], r:'low', t:'Indicators, data and analytics'},
+  {id:'adha', n:'Australian Digital Health Agency', s:'fed', a:'Sydney CBD', ak:['cbd'], r:'lowmed', t:'Product, data and adoption analytics'},
+  {id:'ndia', n:'National Disability Insurance Agency', s:'fed', a:'Sydney CBD & Parramatta', ak:['cbd','parramatta'], r:'lowmed', t:'Data and insights, market stewardship'},
+  {id:'health-fed', n:'Department of Health, Disability and Ageing', s:'fed', a:'Sydney office', ak:['cbd'], r:'low', t:'Data, health economics, program performance', note:'Most roles are in Canberra. Filter APSJobs to Sydney.'},
+  {id:'ansto', n:'ANSTO', s:'fed', a:'Lucas Heights (best by car)', ak:['lucasheights'], r:'lowmed', t:'Nuclear medicine business, commercial, planning', note:'Federal science agency that makes nuclear medicine for hospitals. Public transport is poor.'},
+  {id:'lifeblood', n:'Australian Red Cross Lifeblood', s:'nfp', a:'Alexandria', ak:['alexandria'], r:'lowmed', t:'Donor insights, collections performance, CRM, planning', note:'Government-funded. Recent ads are permanent with salary packaging. Area Manager pays $155k–$170k.'},
+  {id:'cesphn', n:'Central and Eastern Sydney PHN', s:'nfp', a:'Mascot', ak:['mascot'], r:'med', t:'Commissioning, population health planning, data and performance', note:'PHNs plan by catchment. Funding comes in federal contract cycles, so check permanence.'},
+  {id:'hcf', n:'HCF', s:'nfp', a:'Sydney CBD', ak:['cbd'], r:'lowmed', t:'Provider contracting, distribution performance, sales effectiveness', note:'Member-owned not-for-profit health insurer.'},
+  {id:'healthdirect', n:'Healthdirect Australia', s:'nfp', a:'Sydney CBD', ak:['cbd'], r:'med', t:'Data and insights, service performance'},
+  {id:'ccnsw', n:'Cancer Council NSW', s:'nfp', a:'Woolloomooloo', ak:['darlinghurst'], r:'med', t:'Fundraising performance, CRM, insights'},
+  {id:'svha', n:'St Vincent’s Health Australia', s:'nfp', a:'Darlinghurst', ak:['darlinghurst'], r:'med', t:'Commercial and payer performance, BI'},
+  {id:'grc', n:'Georges River Council', s:'council', a:'Hurstville & Kogarah', ak:['hurstville','kogarah'], r:'low', t:'Corporate performance, data, customer insights', note:'35-hour week. Ads offer hybrid work and a 9-day fortnight, subject to operational needs.'},
+  {id:'bayside', n:'Bayside Council', s:'council', a:'Rockdale', ak:['rockdale'], r:'low', t:'Corporate planning and performance, business improvement'},
+  {id:'ssc', n:'Sutherland Shire Council', s:'council', a:'Sutherland', ak:['sutherland'], r:'low', t:'Performance, data, business improvement'},
+  {id:'cos', n:'City of Sydney', s:'council', a:'Sydney CBD (Town Hall)', ak:['cbdsouth'], r:'low', t:'Data and insights, strategy, CRM', note:'The largest council data team, with better pay than suburban councils.'},
+  {id:'unsw', n:'UNSW Sydney', s:'uni', a:'Kensington', ak:['randwick'], r:'med', t:'Planning and performance, student recruitment CRM, business analysis'},
+  {id:'usyd', n:'University of Sydney', s:'uni', a:'Camperdown', ak:['camperdown'], r:'med', t:'Planning and insights, BI, CRM'},
+  {id:'uts', n:'UTS', s:'uni', a:'Ultimo', ak:['ultimo'], r:'high', t:'Planning, BI', note:'Restructure cuts 134 full-time jobs and 1,000+ subjects from 2026.'},
+  {id:'mq', n:'Macquarie University', s:'uni', a:'Macquarie Park', ak:['macquariepark'], r:'high', t:'Planning, BI', note:'Cut 75+ jobs in 2025.'},
+  {id:'csiro', n:'CSIRO', s:'uni', a:'Eveleigh, North Ryde, Lindfield', ak:['redfern','macquariepark','lindfield'], r:'high', t:'Business development, data', note:'818–1,150 roles cut since 2024, with more announced.'},
+  {id:'garvan', n:'Garvan Institute', s:'uni', a:'Darlinghurst', ak:['darlinghurst'], r:'high', t:'Operations, BI, research performance', note:'Most roles are grant-funded and fixed-term.'},
+  {id:'george', n:'The George Institute', s:'uni', a:'Sydney', ak:['cbd'], r:'high', t:'Commercial, data, operations', note:'Grant-funded.'},
+  {id:'sax', n:'Sax Institute', s:'uni', a:'Sydney', ak:['cbd'], r:'high', t:'Health data, research partnerships', note:'Runs the 45 and Up Study.'},
+  {id:'abbvie', n:'AbbVie', s:'private', a:'Mascot', ak:['mascot'], r:'med', t:'Commercial excellence, insights, sales force effectiveness'},
+  {id:'abbott', n:'Abbott (incl. Diabetes Care)', s:'private', a:'Macquarie Park', ak:['macquariepark'], r:'med', t:'Sales force effectiveness, commercial excellence', hot:'Seen hiring (Oct 2026): two Sales Force Effectiveness Manager roles.'},
+  {id:'galderma', n:'Galderma', s:'private', a:'North Sydney', ak:['northsydney'], r:'med', t:'Sales force effectiveness', hot:'Seen hiring (Oct 2026): Sales Force Effectiveness Manager, ANZ.'},
+  {id:'novo', n:'Novo Nordisk', s:'private', a:'Sydney', ak:['cbd'], r:'med', t:'Commercial excellence, channel programs, insights', note:'Diabetes and obesity medicines.'},
+  {id:'roche', n:'Roche', s:'private', a:'Sydney CBD & North Ryde', ak:['cbd','macquariepark'], r:'med', t:'Commercial excellence, insights'},
+  {id:'sonic', n:'Sonic Healthcare (Douglass Hanly Moir)', s:'private', a:'Macquarie Park', ak:['macquariepark'], r:'lowmed', t:'Collection network planning, commercial, BI', note:'Pathology collection centres are planned by catchment.'},
+  {id:'mqpharma', n:'Macquarie Park pharma cluster', s:'private', a:'Macquarie Park', ak:['macquariepark'], r:'med', t:'Commercial excellence, sales force effectiveness, insights', note:'AstraZeneca, MSD, Sanofi, Novartis, Johnson & Johnson.'}
+];
+const STAGES = [['shortlist','Shortlisted'],['applied','Applied'],['interview','Interviewing'],['offer','Offer'],['closed','Closed / not going ahead']];
+const DEFAULT_CRITERIA = ['Permanent / ongoing only','Low layoff risk','Family-friendly hours','Leads and owns the work'];
+
+/* ---------------- state ---------------- */
+let profile = store.get('nr-profile');
+let jobs = store.get('nr-jobs') || [];
+if(!Array.isArray(jobs)) jobs = [];
+function saveProfile(){ store.set('nr-profile', profile); }
+function saveJobs(){ if(!store.set('nr-jobs', jobs)) toast('Couldn’t save on this phone. Storage may be full.'); }
+const hasProfile = () => !!(profile && typeof profile === 'object');
+const pay = () => (hasProfile() && profile.pay && Number(profile.pay.base) > 0) ? profile.pay : null;
+const packageNow = () => { const p = pay(); return p ? Number(p.base) * (1 + (Number(p.bonus) || 0) / 100) * (1 + (Number(p.super) || 0) / 100) : null; };
+const zoneOf = key => (hasProfile() && profile.areaZones && profile.areaZones[key]) || null;
+const ZORDER = {A:1, B:2, C:3, X:4};
+function bestZone(keys){
+  let best = null;
+  for(const k of keys || []){ const z = zoneOf(k); if(z && (!best || ZORDER[z] < ZORDER[best])) best = z; }
+  return best;
+}
+const kf = n => '$' + (Math.abs(n) / 1000).toFixed(1) + 'k';
+const kd = n => (n >= 0 ? '+' : '−') + '$' + (Math.abs(n) / 1000).toFixed(1) + 'k';
+
+/* ---------------- navigation ---------------- */
+const TABS = ['plan','titles','employers','check','tracker','settings'];
+let current = 'plan';
+function showTab(id){
+  if(!TABS.includes(id)) id = 'plan';
+  current = id;
+  for(const t of TABS){
+    $('#panel-' + t).hidden = t !== id;
+    const b = $('#tab-' + t);
+    if(b){ b.setAttribute('aria-selected', String(t === id)); b.tabIndex = t === id ? 0 : -1; }
+  }
+  $('#open-settings').setAttribute('aria-pressed', String(id === 'settings'));
+  if(id === 'settings') renderSettings();
+  try { sessionStorage.setItem('nr-tab', id); } catch {}
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.addEventListener('click', e => { const g = e.target.closest('[data-goto]'); if(g){ e.preventDefault(); showTab(g.dataset.goto); } });
+$('#open-settings').addEventListener('click', () => showTab(current === 'settings' ? 'plan' : 'settings'));
+
+/* ---------------- plan ---------------- */
+function renderChips(){
+  const crit = (hasProfile() && Array.isArray(profile.criteria) && profile.criteria.length) ? profile.criteria : DEFAULT_CRITERIA;
+  const p = pay();
+  const extra = [];
+  if(hasProfile() && profile.home) extra.push(`From ${esc(profile.home)}`);
+  if(p) extra.push(`<span class="mono">Now: ${kf(Number(p.base))} + ~${esc(p.bonus)}% bonus</span>`);
+  $('#plan-chips').innerHTML = [...crit.map(esc), ...extra].map(c => `<span class="chip">${c}</span>`).join('');
+  $('#setup-banner').hidden = hasProfile();
+}
+function renderRail(){
+  const el = $('#rail');
+  if(!hasProfile() || !profile.areaZones){ el.innerHTML = '<div class="empty">Import your profile in Settings to see commute zones from home.</div>'; return; }
+  $('#rail-eyebrow').textContent = profile.home ? 'Commute from ' + profile.home : 'Commute';
+  const groups = {A:[], B:[], C:[], X:[]};
+  for(const [k, [label]] of Object.entries(AREAS)){ const z = zoneOf(k); if(groups[z]) groups[z].push(label); }
+  el.innerHTML = '<div class="rail">' + ['A','B','C','X'].map(z => {
+    const [nm, time, col] = ZONE_NAMES[z];
+    return `<div class="seg${z === 'X' ? ' beyond' : ''}" style="--c:${col}"><div class="bar" style="background:${col}"></div>
+      <div class="lbl"><b>${nm}</b><span class="mono small muted">${time}</span></div>
+      <ul>${groups[z].map(l => `<li>${esc(l)}</li>`).join('') || '<li class="muted">None</li>'}</ul></div>`;
+  }).join('') + '</div>';
+}
+function renderPay(){
+  const now = packageNow(), p = pay();
+  const rows = [];
+  if(now) rows.push(`<tr class="now"><td><b>Your current role</b><br><span class="small muted">Base + ${esc(p.bonus)}% bonus</span></td><td class="num">${kf(Number(p.base))}</td><td class="num">${esc(p.super)}%</td><td class="num">${kf(now)}</td><td><span class="pill info">Baseline</span></td></tr>`);
+  for(const g of GRADES){
+    const plo = g.lo * (1 + g.sup / 100), phi = g.hi * (1 + g.sup / 100);
+    let cmp = '<span class="small muted">Set your pay in Settings</span>';
+    if(now){
+      const pill = phi < now ? '<span class="pill bad">Pay cut</span>' : plo >= now ? '<span class="pill good">Matches or better</span>' : '<span class="pill warn">Matches from mid-band</span>';
+      cmp = `${pill} <span class="mono small muted">${kd(plo - now)} to ${kd(phi - now)}</span>`;
+    }
+    rows.push(`<tr><td><b>${esc(g.name)}</b>${g.pk ? '<sup>*</sup>' : ''}<br><span class="small muted">${esc(g.who)}</span></td><td class="num">${kf(g.lo)}–${kf(g.hi)}</td><td class="num">${g.sup}%</td><td class="num">${kf(plo)}–${kf(phi)}</td><td>${cmp}</td></tr>`);
+  }
+  $('#pay-rows').innerHTML = rows.join('');
+}
+function renderSoon(){
+  const soon = jobs.filter(j => j.status !== 'closed').map(j => ({j, n: daysUntil(j.closing)})).filter(x => x.n !== null && x.n >= 0 && x.n <= 14).sort((a, b) => a.n - b.n);
+  const el = $('#soon-list');
+  if(!soon.length){ el.innerHTML = '<p class="muted small">Nothing saved closes in the next two weeks. Saved roles with a closing date show here.</p>'; return; }
+  el.innerHTML = soon.map(({j}) => {
+    const u = safeUrl(j.link);
+    return `<div class="soon-item">${closingPill(j.closing)}<span class="t">${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : esc(j.title)}</span><span class="muted small">${esc(j.employer)}${j.pay ? ' · ' + esc(j.pay) : ''}</span></div>`;
+  }).join('');
+}
+
+/* ---------------- titles ---------------- */
+function seekUrl(q){ return 'https://www.seek.com.au/jobs?keywords=' + enc(q) + '&where=' + enc('All Sydney NSW') + ($('#opt-ft').checked ? '&worktype=242' : '') + ($('#opt-recent').checked ? '&daterange=14' : ''); }
+function linkedinUrl(q){ return 'https://www.linkedin.com/jobs/search/?keywords=' + enc(q) + '&location=' + enc('Greater Sydney Area') + ($('#opt-ft').checked ? '&f_JT=F' : '') + ($('#opt-recent').checked ? '&f_TPR=r1209600' : ''); }
+function nswUrl(k){ const slug = k.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); return `https://iworkfor.nsw.gov.au/jobs/${slug}/all-agencies/all-organisations-entities/all-categories/all-locations/all-worktypes?keyword=${enc(k)}`; }
+const apsUrl = k => 'https://www.apsjobs.gov.au/s/job-search?searchString=' + enc(k);
+function titleCard(t){
+  return `<article class="tcard"><div class="hd"><h3>${esc(t.title)}</h3>${t.pick ? '<span class="pill info">Your pick</span>' : ''}</div>
+    <dl><dt>Why it fits</dt><dd>${esc(t.fit)}</dd><dt>Watch for</dt><dd>${esc(t.watch)}</dd><dt>Where</dt><dd>${esc(t.where)}</dd><dt>Grade</dt><dd class="mono small">${esc(t.grade)}</dd><dt>AI-resilient</dt><dd>${esc(t.ai)}</dd></dl>
+    ${t.live ? `<p class="live">${esc(t.live)}</p>` : ''}
+    <div class="linkrow">
+      <a class="btn small" data-kind="seek" data-q="${esc(t.q)}" target="_blank" rel="noopener">Seek</a>
+      <a class="btn small" data-kind="li" data-q="${esc(t.q)}" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn small" data-kind="nsw" data-q="${esc(t.gov)}" target="_blank" rel="noopener">NSW Gov</a>
+      <a class="btn small" data-kind="aps" data-q="${esc(t.gov)}" target="_blank" rel="noopener">APS</a>
+    </div><span class="q">NSW Health Careers keyword: ${esc(t.gov)}</span></article>`;
+}
+function refreshLinks(){
+  document.querySelectorAll('a[data-kind]').forEach(a => {
+    const q = a.dataset.q, k = a.dataset.kind;
+    a.href = k === 'seek' ? seekUrl(q) : k === 'li' ? linkedinUrl(q) : k === 'nsw' ? nswUrl(q) : apsUrl(q);
+  });
+}
+$('#titles-picks').innerHTML = TITLES.filter(t => t.pick).map(titleCard).join('');
+$('#titles-more').innerHTML = TITLES.filter(t => !t.pick).map(titleCard).join('');
+['#opt-ft','#opt-recent'].forEach(s => $(s).addEventListener('change', refreshLinks));
+refreshLinks();
+
+/* ---------------- employers ---------------- */
+const empState = {sector:'all', zone:'C', safe:false};
+function renderSectorBtns(){
+  $('#f-sector').innerHTML = ['all', ...Object.keys(SECTORS)].map(k => `<button data-s="${k}" aria-pressed="${empState.sector === k}">${k === 'all' ? 'All sectors' : esc(SECTORS[k])}</button>`).join('');
+}
+function renderEmployers(){
+  const zonesOn = hasProfile() && !!profile.areaZones;
+  $('#f-zone').querySelectorAll('button').forEach(b => { b.disabled = !zonesOn && b.dataset.z !== 'all'; b.setAttribute('aria-pressed', String(zonesOn ? b.dataset.z === empState.zone : b.dataset.z === 'all')); });
+  const lim = zonesOn ? empState.zone : 'all';
+  const list = EMPLOYERS.filter(e => {
+    if(empState.sector !== 'all' && e.s !== empState.sector) return false;
+    if(empState.safe && e.r === 'high') return false;
+    if(lim !== 'all'){ const z = bestZone(e.ak); if(!z || ZORDER[z] > ZORDER[lim]) return false; }
+    return true;
+  });
+  $('#emp-count').textContent = `${list.length} of ${EMPLOYERS.length}`;
+  if(!list.length){ $('#emp-list').innerHTML = '<div class="empty">No employers match these filters.</div>'; return; }
+  const notes = (hasProfile() && profile.empNotes) || {};
+  $('#emp-list').innerHTML = list.map(e => {
+    const [rc, rl] = RISK[e.r]; const z = bestZone(e.ak);
+    const zoneHtml = z ? `<span class="zone"><i style="background:${ZONE_NAMES[z][2]}"></i>${z === 'X' ? 'Beyond' : 'Zone ' + z}</span>` : '';
+    const careers = 'https://www.google.com/search?q=' + enc(e.n.replace(/\s*\(.*\)/, '') + ' careers jobs');
+    return `<div class="emp"><div class="top"><div><div class="n">${esc(e.n)}</div><div class="meta"><span>${esc(SECTORS[e.s])}</span><span>${esc(e.a)}</span></div></div>
+      <a class="btn small" href="${careers}" target="_blank" rel="noopener">Careers</a></div>
+      <div class="meta">${zoneHtml}<span class="pill ${rc}">${rl} risk</span></div>
+      <div class="t">${esc(e.t)}</div>
+      ${notes[e.id] ? `<div class="nt">${esc(notes[e.id])}</div>` : ''}${e.hot ? `<div class="hot">${esc(e.hot)}</div>` : ''}${e.note ? `<div class="nt">${esc(e.note)}</div>` : ''}</div>`;
+  }).join('');
+}
+$('#f-sector').addEventListener('click', e => { const b = e.target.closest('button[data-s]'); if(!b) return; empState.sector = b.dataset.s; renderSectorBtns(); renderEmployers(); });
+$('#f-zone').addEventListener('click', e => { const b = e.target.closest('button[data-z]'); if(!b || b.disabled) return; empState.zone = b.dataset.z; renderEmployers(); });
+$('#f-safe').addEventListener('change', e => { empState.safe = e.target.checked; renderEmployers(); });
+renderSectorBtns();
+
+/* ---------------- ad checker (offline rules) ---------------- */
+const SKILLS = [['CRM',/\bcrm\b|dynamics|salesforce/i],['Power BI / dashboards',/power\s?bi|dashboard|tableau|qlik/i],['PySpark / data pipelines',/pyspark|spark|databricks|data pipeline|etl|python|sql/i],
+  ['Territories / catchments',/territor|catchment|geospatial|population|demand model/i],['Targets / incentives',/target|incentive|quota|kpi|performance framework/i],['Pipeline / forecasting',/pipeline|forecast/i],
+  ['Master data / governance',/master data|\bmdm\b|data governance|data quality/i],['Commercial / pricing',/commercial|pricing|revenue|funding|purchasing|activity based/i],['Stakeholders / strategy',/stakeholder|strateg/i],['Excel / modelling',/excel|financial model|modelling|modeling/i]];
+const WLB_POS = /flexib|hybrid|work from home|working from home|wfh|part[- ]time|job[- ]share|9[- ]day fortnight|nine[- ]day fortnight|compressed|35 hours|purchased leave|family[- ]friendly/i;
+const WLB_NEG = /(frequent|regular|extensive|interstate|international|overnight)\s+travel|travel (is )?required|on[- ]call|after[- ]hours|weekends?\b|field[- ]based|fast[- ]paced|long hours/gi;
+function findArea(text){
+  const lines = text.split(/\n/);
+  const locLine = lines.find(l => /^\s*(location|work location|based in|office)\b/i.test(l)) || '';
+  for(const scope of [locLine, text]){
+    if(!scope) continue;
+    const low = scope.toLowerCase();
+    let best = null;
+    for(const [k, [label, words]] of Object.entries(AREAS)){
+      for(const w of words){
+        const re = new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+        const m = re.exec(low);
+        if(m && (!best || m.index < best.idx)) best = {key:k, label, idx:m.index};
+      }
+    }
+    if(best) return best;
+  }
+  return null;
+}
+function analyzeAd(text){
+  const lines = text.split(/\n/).map(s => s.trim()).filter(Boolean);
+  const r = {checks:[]};
+  r.title = (lines[0] || 'Untitled role').replace(/^(job title|role title|position)\s*[:\-]\s*/i, '').slice(0, 120);
+  const empLine = text.match(/(?:employer|organisation|organization|agency|company)\s*[:\-]\s*(.+)/i);
+  r.employer = empLine ? empLine[1].trim().slice(0, 100) : (lines[1] && lines[1].length < 90 && !/:/.test(lines[1]) ? lines[1] : '');
+  const clsM = text.match(/clerk\s*grade\s*\d{1,2}(?:\s*\/\s*\d{1,2})?|\bgrade\s*\d{1,2}\s*\/\s*\d{1,2}|health\s+manager\s+(?:level|lvl)\s*\d|\bHM\s?[1-6]\b|\bEL\s?[12]\b|\bAPS\s?[1-6]\b/i);
+  r.classification = clsM ? clsM[0].replace(/\s+/g, ' ') : '';
+  const amounts = [...text.matchAll(/\$\s?(\d{2,3}(?:,\d{3})+|\d{2,3}(?:\.\d+)?\s?[kK]\b|\d{6})/g)].map(m => {
+    const v = m[1].replace(/,/g, ''); return /k$/i.test(v.trim()) ? parseFloat(v) * 1000 : parseFloat(v);
+  }).filter(n => n >= 50000 && n <= 450000);
+  const closeM = text.match(/closing date\s*[:\-|]?\s*(\d{1,2})\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*(20\d\d)/i);
+  if(closeM){ const mi = 'janfebmaraprmayjunjulaugsepoctnovdec'.indexOf(closeM[2].toLowerCase()) / 3 + 1; r.closing = `${closeM[3]}-${String(mi).padStart(2, '0')}-${String(closeM[1]).padStart(2, '0')}`; } else r.closing = '';
+
+  // 1. permanence
+  const perm = /\b(permanent|ongoing)\b/i.test(text);
+  const tempM = text.match(/\b(temporary|temp\b|fixed[- ]term|contract role|contract position|\bcontract\b|contractor|maternity|parental leave (?:cover|backfill)|secondment|casual|grant[- ]funded|\d{1,2}[- ]month)/i);
+  if(perm && !tempM) r.checks.push({name:'Permanent & secure', s:'pass', note:'The ad says permanent or ongoing.'});
+  else if(perm && tempM) r.checks.push({name:'Permanent & secure', s:'warn', note:`Mentions both permanent/ongoing and “${tempM[0]}”. Ask which this role is.`});
+  else if(tempM) r.checks.push({name:'Permanent & secure', s:'fail', note:`Looks non-permanent (“${tempM[0]}”).`});
+  else r.checks.push({name:'Permanent & secure', s:'warn', note:'The work type isn’t stated. Ask before applying.'});
+  r.employment = perm && !tempM ? 'Permanent' : tempM && !perm ? 'Temporary / contract' : 'Unclear';
+
+  // 2. commute
+  const area = findArea(text);
+  const remote = /fully remote|remote[- ]first|work from anywhere/i.test(text);
+  if(!hasProfile() || !profile.areaZones) r.checks.push({name:'Commute', s:'warn', note:area ? `Location: ${area.label}. Import your profile to see the zone.` : 'Import your profile to check commute.'});
+  else if(!area) r.checks.push({name:'Commute', s:'warn', note:'Location not recognised. Check it on a map.'});
+  else {
+    const z = zoneOf(area.key); r.location = area.label; r.zone = z;
+    if(z === 'A' || z === 'B') r.checks.push({name:'Commute', s:'pass', note:`${area.label}: zone ${z}.`});
+    else if(z === 'C') r.checks.push({name:'Commute', s:'warn', note:`${area.label}: zone C, your limit. Check how many office days.`});
+    else r.checks.push({name:'Commute', s: remote ? 'warn' : 'fail', note:`${area.label} is beyond your limit${remote ? ', but the ad mentions remote work' : ''}.`});
+  }
+
+  // 3. pay
+  const now = packageNow();
+  const fed = /\bAPS\b|\bEL\s?[12]\b|commonwealth|australian government/i.test(text);
+  const sup = fed ? 15.4 : 12;
+  let lo = null, hi = null, how = '';
+  if(amounts.length){ lo = Math.min(...amounts); hi = Math.max(...amounts); how = 'listed salary'; }
+  else { const g = GRADES.find(g => g.re.test(r.classification || text)); if(g){ lo = g.lo; hi = g.hi; how = g.name + ' rates'; } }
+  r.salary = lo ? (lo === hi ? kf(lo) : `${kf(lo)}–${kf(hi)}`) : '';
+  if(!lo) r.checks.push({name:'Pay', s:'warn', note:'No salary or grade listed. Ask for the base and any bonus.'});
+  else if(!now) r.checks.push({name:'Pay', s:'warn', note:`${r.salary} (${how}). Set your pay in Settings to compare.`});
+  else {
+    const incl = /package|including super|inclusive of super|incl\.? super/i.test(text) && hi > 0;
+    const plo = incl ? lo : lo * (1 + sup / 100), phi = incl ? hi : hi * (1 + sup / 100);
+    if(phi < now * 0.97) r.checks.push({name:'Pay', s:'fail', note:`${r.salary} (${how}) is a pay cut: ${kd(phi - now)} even at the top of the band.`});
+    else if(plo >= now * 0.97) r.checks.push({name:'Pay', s:'pass', note:`${r.salary} (${how}) matches your package or better.`});
+    else r.checks.push({name:'Pay', s:'warn', note:`${r.salary} (${how}) matches from the middle of the band. Negotiate the starting step.`});
+  }
+
+  // 4. work-life balance
+  const pos = WLB_POS.test(text);
+  const negs = [...new Set((text.match(WLB_NEG) || []).map(s => s.toLowerCase()))];
+  const hrsM = text.match(/(\d{2}(?:\.\d)?)\s*(?:hours|hrs)\s*(?:per|a|\/)\s*week/i);
+  const hrsOk = hrsM && parseFloat(hrsM[1]) <= 38;
+  if((pos || hrsOk) && !negs.length) r.checks.push({name:'Work-life balance', s:'pass', note:pos ? 'Mentions flexible or hybrid work.' : `Standard hours (${hrsM[1]} a week).`});
+  else if(negs.length && !pos) r.checks.push({name:'Work-life balance', s: negs.length > 1 ? 'fail' : 'warn', note:`Mentions ${negs.join(', ')}.`});
+  else if(negs.length) r.checks.push({name:'Work-life balance', s:'warn', note:`Flexible work mentioned, but also ${negs.join(', ')}.`});
+  else r.checks.push({name:'Work-life balance', s:'warn', note:'No mention of flexibility. Ask about office days.'});
+
+  // 5. beyond pure analysis
+  const tl = r.title.toLowerCase();
+  const senior = /\b(manager|lead|head|principal|director|chief|owner)\b/.test(tl);
+  const junior = /\b(analyst|developer|officer|coordinator|assistant|administrator|specialist|support)\b/.test(tl);
+  const leads = /lead a team|direct reports|manage a team|team of \d|people leader|line manage|leading a team/i.test(text);
+  if(senior || leads) r.checks.push({name:'Beyond pure analysis', s:'pass', note: leads ? 'Leads people or owns a function.' : 'A manager or lead-level title.'});
+  else if(junior) r.checks.push({name:'Beyond pure analysis', s:'fail', note:'An individual-contributor title. This kind of work is most exposed to automation and offshoring.'});
+  else r.checks.push({name:'Beyond pure analysis', s:'warn', note:'Unclear seniority. Check who the role reports to and whether it has direct reports.'});
+
+  // 6. skills
+  const found = SKILLS.filter(([, re]) => re.test(text)).map(([n]) => n);
+  r.skills = found;
+  r.checks.push({name:'Skills match', s: found.length >= 4 ? 'pass' : found.length >= 2 ? 'warn' : 'fail', note: found.length ? found.join(', ') : 'Few of your skills are mentioned.'});
+
+  const W = {'Permanent & secure':30, 'Commute':20, 'Pay':20, 'Work-life balance':10, 'Beyond pure analysis':10, 'Skills match':10};
+  const V = {pass:1, warn:.5, fail:0};
+  let score = Math.round(r.checks.reduce((a, c) => a + W[c.name] * V[c.s], 0));
+  if(r.checks[0].s === 'fail') score = Math.min(score, 45);
+  r.score = score;
+  r.verdict = score >= 75 ? 'Apply' : score >= 50 ? 'Maybe' : 'Skip';
+  return r;
+}
+function zonesText(){
+  if(!hasProfile() || !profile.areaZones) return '';
+  const g = {A:[], B:[], C:[], X:[]};
+  for(const [k, [label]] of Object.entries(AREAS)){ const z = zoneOf(k); if(g[z]) g[z].push(label); }
+  return `Zone A (up to 30 min): ${g.A.join(', ')}. Zone B (30-45 min): ${g.B.join(', ')}. Zone C (45-60 min, the limit): ${g.C.join(', ')}. Beyond the limit: ${g.X.join(', ')}.`;
+}
+function aiPrompt(ad){
+  const now = packageNow(), p = pay();
+  return `Screen this job ad for me. Score its fit 0-100 and give a verdict (Apply / Maybe / Skip), then a pass/warn/fail line for each criterion, three things from my background to lead with, and two questions to ask the hiring manager.
+
+ABOUT ME
+${(hasProfile() && profile.about) || 'Commercial excellence and analytics professional.'}
+${p ? `Pay now: $${Number(p.base).toLocaleString('en-AU')} base, usual bonus ${p.bonus}%, super ${p.super}%. Package about ${kf(now)}.` : ''}
+${hasProfile() && profile.home ? `Home: ${profile.home}. ` : ''}${zonesText()}
+
+MY CRITERIA, in priority order
+1. Permanent or ongoing role with low layoff risk. Temporary, contract, fixed-term or grant-funded is a fail unless it can convert.
+2. Work-life balance: standard hours, flexible or hybrid work, little travel.
+3. Commute within my zones above.
+4. Pay near my current package. NSW Clerk Grade 11/12, NSW Health Manager Level 4 and APS EL2 roughly match; Grade 9/10, HM3 and EL1 are a pay cut.
+5. Not a pure analyst role: I want to own strategy, targets, a platform or a team.
+
+JOB AD
+${ad.slice(0, 12000)}`;
+}
+let lastResult = null;
+function renderResult(r){
+  const tone = r.verdict === 'Apply' ? 'good' : r.verdict === 'Skip' ? 'bad' : 'warn';
+  const facts = [r.employment, r.classification, r.salary, r.location && (r.location + (r.zone ? ' · ' + (r.zone === 'X' ? 'beyond' : 'zone ' + r.zone) : ''))].filter(Boolean);
+  $('#c-out').innerHTML = `
+    <div class="score"><div class="dial" style="background:var(--${tone}-soft);color:var(--${tone})">${r.score}</div>
+      <div class="stack" style="gap:4px"><span><span class="pill ${tone}">${esc(r.verdict)}</span></span><h3>${esc(r.title)}</h3>${r.employer ? `<span class="muted small">${esc(r.employer)}</span>` : ''}</div></div>
+    ${facts.length ? `<div class="chips">${facts.map(f => `<span class="chip k">${esc(f)}</span>`).join('')}</div>` : ''}
+    ${r.closing ? `<div>${closingPill(r.closing)}</div>` : ''}
+    <ul class="checks">${r.checks.map(c => `<li><span><i class="dot ${c.s}"></i></span><span class="cn">${esc(c.name)}</span><span class="cnote">${esc(c.note)}</span></li>`).join('')}</ul>
+    <p class="small muted">A quick rule-based check. For a deeper read, send the ad and your criteria to an AI chat app.</p>
+    <div class="linkrow"><button class="btn primary" id="c-save">Save to tracker</button><button class="btn" id="c-ai">Ask an AI app</button></div>`;
+  $('#c-save').addEventListener('click', () => {
+    const link = $('#c-link').value.trim();
+    openForm({title:r.title, employer:r.employer, location:r.location || '', link, pay:[r.classification, r.salary].filter(Boolean).join(' · '), closing:r.closing, status:'shortlist', notes:`${r.verdict} ${r.score}/100 on the quick check.`});
+    showTab('tracker');
+  });
+  $('#c-ai').addEventListener('click', () => shareText('Job ad check', aiPrompt($('#c-ad').value), 'Copied. Paste it into Claude or another AI app.'));
+}
+const EXAMPLE_AD = `Manager, Analytics and Improvement
+Employer: NSW Ministry of Health, System Purchasing Branch
+Employment Type: Full Time Permanent
+Position Classification: Health Manager Level 4
+Remuneration: $153,559 - $182,954, plus Superannuation
+Location: 1 Reserve Road, St Leonards NSW
+Hours Per Week: 38
+Closing Date: 22 Oct 2026
+While regular office presence is essential, we offer flexible work arrangements to support your needs.
+This is an opportunity to lead statewide work that strengthens the capability and consistency of analytics used in purchasing health services, working with stakeholders across local health districts on performance and funding.
+(Example: an excerpt of a real ad from October 2026.)`;
+$('#c-run').addEventListener('click', () => {
+  const ad = $('#c-ad').value.trim();
+  if(ad.length < 60){ $('#c-out').innerHTML = '<p class="msg">Paste the full job ad first, including the work type and location.</p>'; return; }
+  lastResult = analyzeAd(ad); renderResult(lastResult);
+  $('#c-out').scrollIntoView({behavior:'smooth', block:'start'});
+});
+$('#c-clear').addEventListener('click', () => { $('#c-ad').value = ''; $('#c-link').value = ''; $('#c-out').innerHTML = '<p class="muted">The result shows here.</p>'; $('#shared-banner').hidden = true; });
+$('#c-example').addEventListener('click', () => { $('#c-ad').value = EXAMPLE_AD; $('#c-link').value = 'https://iworkfor.nsw.gov.au/job/manager-analytics-and-improvement-603890'; });
+
+/* ---------------- sharing helpers ---------------- */
+async function shareText(title, text, copiedMsg){
+  if(navigator.share){ try { await navigator.share({title, text}); return; } catch(e){ if(e && e.name === 'AbortError') return; } }
+  try { await navigator.clipboard.writeText(text); toast(copiedMsg || 'Copied.'); }
+  catch { toast('Couldn’t share or copy on this device.'); }
+}
+async function shareFile(filename, obj, title){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const file = new File([blob], filename, {type:'application/json'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try { await navigator.share({files:[file], title}); return; } catch(e){ if(e && e.name === 'AbortError') return; }
+  }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  toast('Saved ' + filename + ' to Downloads.');
+}
+
+/* ---------------- tracker ---------------- */
+$('#f-status').innerHTML = STAGES.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('');
+function updateBadge(){ const n = jobs.filter(j => j.status !== 'closed').length; const b = $('#t-badge'); b.textContent = String(n); b.hidden = n === 0; }
+function openForm(data){
+  const f = data || {};
+  $('#t-form-title').textContent = f.id ? 'Edit role' : 'Add a role';
+  $('#f-id').value = f.id || '';
+  $('#f-title').value = f.title || ''; $('#f-employer').value = f.employer || ''; $('#f-location').value = f.location || '';
+  $('#f-pay').value = f.pay || ''; $('#f-link').value = f.link || ''; $('#f-closing').value = f.closing || '';
+  $('#f-status').value = f.status || 'shortlist'; $('#f-notes').value = f.notes || '';
+  $('#t-form').hidden = false;
+  setTimeout(() => $('#t-form').scrollIntoView({behavior:'smooth', block:'start'}), 50);
+}
+$('#t-add').addEventListener('click', () => openForm());
+$('#f-cancel').addEventListener('click', () => { $('#t-form').hidden = true; });
+$('#t-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const now = new Date().toISOString();
+  const id = $('#f-id').value;
+  const data = {title:$('#f-title').value.trim(), employer:$('#f-employer').value.trim(), location:$('#f-location').value.trim(), pay:$('#f-pay').value.trim(),
+    link:$('#f-link').value.trim(), closing:$('#f-closing').value, status:$('#f-status').value, notes:$('#f-notes').value.trim(), updatedAt:now};
+  if(!data.title || !data.employer){ toast('Add a job title and an employer.'); return; }
+  if(id){ const j = jobs.find(x => x.id === id); if(j) Object.assign(j, data); }
+  else jobs.push({id:uid(), createdAt:now, source:'Added ' + new Date().toLocaleDateString('en-AU', {day:'numeric', month:'short'}), ...data});
+  saveJobs(); $('#t-form').hidden = true; renderAllJobs(); toast(id ? 'Saved.' : 'Added to the tracker.');
+});
+function jobCard(j){
+  const opts = STAGES.map(([v, l]) => `<option value="${v}"${j.status === v ? ' selected' : ''}>${esc(l)}</option>`).join('');
+  const u = safeUrl(j.link);
+  return `<div class="job" data-id="${esc(j.id)}">
+    <div class="jt">${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : esc(j.title)}</div>
+    <div class="je">${esc(j.employer)}${j.location ? ' · ' + esc(j.location) : ''}</div>
+    ${j.pay ? `<div class="jp">${esc(j.pay)}</div>` : ''}
+    ${j.closing && j.status !== 'closed' ? `<div>${closingPill(j.closing)}</div>` : ''}
+    ${j.notes ? `<div class="jn">${esc(j.notes)}</div>` : ''}
+    <div class="jrow"><select data-act="status" aria-label="Status">${opts}</select><button class="btn small" data-act="edit">Edit</button><span data-act="delwrap"><button class="btn small ghost danger" data-act="del">Delete</button></span></div>
+    ${j.source ? `<span class="src">${esc(j.source)}</span>` : ''}</div>`;
+}
+function sortJobs(a, b){ const ca = a.closing || '9999', cb = b.closing || '9999'; return ca < cb ? -1 : ca > cb ? 1 : String(a.title).localeCompare(String(b.title)); }
+function renderTracker(){
+  const el = $('#t-board');
+  if(!jobs.length){ el.innerHTML = '<div class="empty">No roles saved yet. Tap “Add a role”, save one from the Check tab, or import a tracker file.</div>'; return; }
+  el.innerHTML = '<div class="tgrid">' + STAGES.map(([v, l]) => {
+    const list = jobs.filter(j => (j.status || 'shortlist') === v).sort(sortJobs);
+    if(v === 'closed' && !list.length) return '';
+    return `<div class="tgroup"><h3><span>${esc(l)}</span><span>${list.length}</span></h3>${list.length ? list.map(jobCard).join('') : '<div class="colempty">None yet</div>'}</div>`;
+  }).join('') + '</div>';
+}
+function renderAllJobs(){ renderTracker(); renderSoon(); updateBadge(); }
+$('#t-board').addEventListener('change', e => {
+  if(e.target.dataset.act !== 'status') return;
+  const j = jobs.find(x => x.id === e.target.closest('.job').dataset.id); if(!j) return;
+  j.status = e.target.value; j.updatedAt = new Date().toISOString(); saveJobs(); renderAllJobs();
+});
+$('#t-board').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-act]'); if(!btn) return;
+  const card = btn.closest('.job'); const j = jobs.find(x => x.id === card.dataset.id); if(!j) return;
+  const wrap = card.querySelector('[data-act="delwrap"]');
+  if(btn.dataset.act === 'edit') openForm(j);
+  else if(btn.dataset.act === 'del') wrap.innerHTML = '<button class="btn small danger" data-act="del-yes">Delete it</button> <button class="btn small ghost" data-act="del-no">Keep</button>';
+  else if(btn.dataset.act === 'del-no') wrap.innerHTML = '<button class="btn small ghost danger" data-act="del">Delete</button>';
+  else if(btn.dataset.act === 'del-yes'){ jobs = jobs.filter(x => x.id !== j.id); saveJobs(); renderAllJobs(); toast('Deleted.'); }
+});
+$('#t-share').addEventListener('click', () => {
+  const active = jobs.filter(j => j.status !== 'closed').sort(sortJobs);
+  if(!active.length){ toast('No active roles to share yet.'); return; }
+  const label = Object.fromEntries(STAGES);
+  const text = 'Job search: ' + active.length + ' active roles\n\n' + active.map(j => `• ${j.title} — ${j.employer}\n  ${label[j.status] || 'Shortlisted'}${j.closing ? ' · closes ' + j.closing : ''}${j.pay ? ' · ' + j.pay : ''}${safeUrl(j.link) ? '\n  ' + j.link : ''}`).join('\n\n');
+  shareText('Job search', text, 'List copied.');
+});
+$('#t-export').addEventListener('click', () => shareFile(`next-role-tracker-${todayISO()}.json`, {kind:'next-role-jobs', version:1, exportedAt:new Date().toISOString(), jobs}, 'Next Role tracker'));
+
+/* ---------------- import / export ---------------- */
+function mergeJobs(incoming){
+  let added = 0, updated = 0;
+  for(const raw of incoming || []){
+    if(!raw || typeof raw !== 'object' || !raw.title) continue;
+    const j = {id:String(raw.id || uid()), title:String(raw.title), employer:String(raw.employer || ''), location:String(raw.location || ''), pay:String(raw.pay || ''),
+      link:safeUrl(raw.link), closing:/^\d{4}-\d{2}-\d{2}$/.test(String(raw.closing || '')) ? raw.closing : '', status:STAGES.some(([v]) => v === raw.status) ? raw.status : 'shortlist',
+      notes:String(raw.notes || ''), source:String(raw.source || ''), createdAt:String(raw.createdAt || new Date().toISOString()), updatedAt:String(raw.updatedAt || raw.createdAt || new Date().toISOString())};
+    const have = jobs.find(x => x.id === j.id);
+    if(!have){ jobs.push(j); added++; }
+    else if(j.updatedAt > (have.updatedAt || '')){ Object.assign(have, j); updated++; }
+  }
+  saveJobs();
+  return {added, updated};
+}
+function importObject(obj){
+  if(!obj || typeof obj !== 'object') throw new Error('bad');
+  const parts = [];
+  if(obj.kind === 'next-role-profile' || obj.kind === 'next-role-backup'){
+    const p = obj.profile || obj;
+    profile = {pay:p.pay || null, home:p.home || '', areaZones:p.areaZones || null, about:p.about || '', criteria:Array.isArray(p.criteria) ? p.criteria : null, empNotes:p.empNotes || {}};
+    saveProfile(); parts.push('profile');
+  }
+  if(Array.isArray(obj.jobs)){ const {added, updated} = mergeJobs(obj.jobs); parts.push(`${added} new role${added === 1 ? '' : 's'}` + (updated ? `, ${updated} updated` : '')); }
+  if(!parts.length) throw new Error('bad');
+  renderEverything();
+  return parts.join(' and ');
+}
+async function importFile(file){
+  try { const text = await file.text(); const what = importObject(JSON.parse(text)); toast('Imported ' + what + '.'); }
+  catch { toast('That file isn’t a Next Role profile, tracker or backup.'); }
+}
+$('#t-import').addEventListener('change', e => { const f = e.target.files[0]; if(f) importFile(f); e.target.value = ''; });
+$('#s-import').addEventListener('change', e => { const f = e.target.files[0]; if(f) importFile(f); e.target.value = ''; });
+$('#s-paste-go').addEventListener('click', () => {
+  try { const what = importObject(JSON.parse($('#s-paste').value)); $('#s-paste').value = ''; toast('Imported ' + what + '.'); }
+  catch { toast('That text isn’t a Next Role profile or tracker file.'); }
+});
+$('#s-backup').addEventListener('click', () => shareFile(`next-role-backup-${todayISO()}.json`, {kind:'next-role-backup', version:1, exportedAt:new Date().toISOString(), profile, jobs}, 'Next Role backup'));
+
+/* ---------------- settings ---------------- */
+function ensureProfile(){ if(!hasProfile()) profile = {pay:null, home:'', areaZones:null, about:'', criteria:null, empNotes:{}}; }
+function renderSettings(){
+  const p = pay() || (hasProfile() && profile.pay) || {};
+  $('#s-base').value = p.base || ''; $('#s-bonus').value = p.bonus ?? ''; $('#s-super').value = p.super ?? '';
+  $('#s-home').value = (hasProfile() && profile.home) || '';
+  $('#s-about').value = (hasProfile() && profile.about) || '';
+  const now = packageNow(); $('#s-package').textContent = now ? 'Current package: ' + kf(now) : 'Enter your base, bonus and super to compare packages.';
+  $('#s-zones').innerHTML = Object.entries(AREAS).map(([k, [label]]) => {
+    const z = zoneOf(k) || '';
+    return `<label for="z-${k}">${esc(label)}</label><select id="z-${k}" data-area="${k}"><option value=""${!z ? ' selected' : ''}>Not set</option>${['A','B','C','X'].map(o => `<option value="${o}"${z === o ? ' selected' : ''}>${o === 'X' ? 'Beyond' : 'Zone ' + o}</option>`).join('')}</select>`;
+  }).join('');
+}
+['#s-base','#s-bonus','#s-super'].forEach(s => $(s).addEventListener('change', () => {
+  ensureProfile(); profile.pay = {base:Number($('#s-base').value) || 0, bonus:Number($('#s-bonus').value) || 0, super:Number($('#s-super').value) || 0};
+  saveProfile(); renderSettings(); renderEverything();
+}));
+$('#s-home').addEventListener('change', e => { ensureProfile(); profile.home = e.target.value.trim(); saveProfile(); renderEverything(); });
+$('#s-about').addEventListener('change', e => { ensureProfile(); profile.about = e.target.value.trim(); saveProfile(); });
+$('#s-zones').addEventListener('change', e => {
+  const k = e.target.dataset.area; if(!k) return;
+  ensureProfile(); profile.areaZones = profile.areaZones || {};
+  if(e.target.value) profile.areaZones[k] = e.target.value; else delete profile.areaZones[k];
+  saveProfile(); renderEverything();
+});
+$('#s-clear-wrap').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  const wrap = $('#s-clear-wrap');
+  if(b.id === 's-clear') wrap.innerHTML = '<p class="small">This deletes your profile and every saved role on this phone. Save a backup first if you might want them.</p><div class="linkrow" style="margin-top:8px"><button class="btn danger" id="s-clear-yes">Delete everything</button><button class="btn ghost" id="s-clear-no">Keep my data</button></div>';
+  else if(b.id === 's-clear-no') wrap.innerHTML = '<button class="btn ghost danger" id="s-clear">Clear all data on this phone</button>';
+  else if(b.id === 's-clear-yes'){ store.del('nr-profile'); store.del('nr-jobs'); profile = null; jobs = []; wrap.innerHTML = '<button class="btn ghost danger" id="s-clear">Clear all data on this phone</button>'; renderEverything(); renderSettings(); toast('All data cleared.'); }
+});
+
+/* ---------------- install + offline ---------------- */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#install-banner').hidden = false; $('#s-install').hidden = false; });
+async function doInstall(){ if(!installEvt) return; installEvt.prompt(); try { await installEvt.userChoice; } catch {} installEvt = null; $('#install-banner').hidden = true; $('#s-install').hidden = true; }
+$('#install-btn').addEventListener('click', doInstall);
+$('#s-install').addEventListener('click', doInstall);
+window.addEventListener('appinstalled', () => { $('#install-banner').hidden = true; $('#s-install').hidden = true; toast('Installed.'); });
+if('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+/* ---------------- share target ---------------- */
+function handleShared(){
+  const params = new URLSearchParams(location.search);
+  const title = params.get('title') || '', text = params.get('text') || '', url = params.get('url') || '';
+  if(!title && !text && !url) return false;
+  const link = safeUrl(url) || ((text.match(/https?:\/\/\S+/) || [''])[0]);
+  const body = [title, text.replace(link, '').trim()].filter(Boolean).join('\n');
+  $('#c-ad').value = body; $('#c-link').value = link;
+  const banner = $('#shared-banner');
+  banner.innerHTML = `<b>Shared from another app</b><span>${body.length < 300 ? 'Most job apps share only the title and link. Open the ad, copy the full text and paste it below to check it, or save it to the tracker now.' : 'Tap “Check this ad”.'}</span><div class="linkrow"><button class="btn small primary" id="sh-save">Save to tracker</button>${link ? `<a class="btn small" href="${esc(link)}" target="_blank" rel="noopener">Open the ad</a>` : ''}</div>`;
+  banner.hidden = false;
+  $('#sh-save').addEventListener('click', () => { openForm({title:(title || body.split('\n')[0] || 'Shared role').slice(0, 120), link, status:'shortlist'}); showTab('tracker'); });
+  history.replaceState(null, '', location.pathname);
+  return true;
+}
+
+/* ---------------- boot ---------------- */
+function renderEverything(){ renderChips(); renderRail(); renderPay(); renderEmployers(); renderAllJobs(); }
+renderEverything();
+let startTab = 'plan';
+try { startTab = sessionStorage.getItem('nr-tab') || 'plan'; } catch {}
+showTab(handleShared() ? 'check' : startTab);
+</script>
+</body>
+</html>
