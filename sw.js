@@ -1,5 +1,5 @@
 // Offline support: the app shell is cached on install; pages load network-first so updates arrive.
-const CACHE = 'next-role-v1';
+const CACHE = 'next-role-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
 
 self.addEventListener('install', e => {

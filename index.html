@@ -458,6 +458,17 @@ details>summary{cursor:pointer;font-weight:600}
         <div class="stack" style="margin-top:8px"><textarea id="s-paste" rows="4" placeholder='{"kind":"next-role-profile", …}'></textarea><div class="linkrow"><button class="btn small" id="s-paste-go">Import pasted text</button></div></div>
       </details>
     </div>
+    <div class="card" id="s-alerts">
+      <h3>Job alerts</h3>
+      <p class="small">New matching jobs are found automatically three times a day (about 7:30am, 12:30pm and 6pm) and sent to the free <b>ntfy</b> app on this phone.</p>
+      <ol class="small" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">
+        <li>Install <b>ntfy</b> from the <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener">Play Store</a>.</li>
+        <li>In ntfy, tap <b>+</b> and enter the topic below (leave the server as ntfy.sh).</li>
+        <li>Tap a notification to open the ad, or use <b>Save in Next Role</b> to add it to your tracker.</li>
+      </ol>
+      <div class="field"><span class="lab">Your alert topic</span><span class="mono" id="s-topic" style="word-break:break-all">Import your profile to see it.</span></div>
+      <div class="linkrow"><button class="btn small" id="s-topic-copy" hidden>Copy topic</button></div>
+    </div>
     <div class="card">
       <h3>Pay now</h3>
       <div class="formgrid">
@@ -484,7 +495,7 @@ details>summary{cursor:pointer;font-weight:600}
       <div class="linkrow"><button class="btn" id="s-backup">Save a backup file</button><button class="btn" id="s-install" hidden>Install app</button></div>
       <div id="s-clear-wrap"><button class="btn ghost danger" id="s-clear">Clear all data on this phone</button></div>
     </div>
-    <p class="small muted">Next Role · version 1 · works offline</p>
+    <p class="small muted">Next Role · version 2 · works offline</p>
   </div>
 </section>
 </main>
@@ -844,9 +855,10 @@ function analyzeAd(text){
   const closeM = text.match(/closing date\s*[:\-|]?\s*(\d{1,2})\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*(20\d\d)/i);
   if(closeM){ const mi = 'janfebmaraprmayjunjulaugsepoctnovdec'.indexOf(closeM[2].toLowerCase()) / 3 + 1; r.closing = `${closeM[3]}-${String(mi).padStart(2, '0')}-${String(closeM[1]).padStart(2, '0')}`; } else r.closing = '';
 
-  // 1. permanence
-  const perm = /\b(permanent|ongoing)\b/i.test(text);
-  const tempM = text.match(/\b(temporary|temp\b|fixed[- ]term|contract role|contract position|\bcontract\b|contractor|maternity|parental leave (?:cover|backfill)|secondment|casual|grant[- ]funded|\d{1,2}[- ]month)/i);
+  // 1. permanence (NSW talent-pool boilerplate mentions "ongoing or temporary" future roles, so ignore it)
+  const permText = text.replace(/[^.\n]*talent pool[^.\n]*\.?/gi, ' ');
+  const perm = /\bpermanent\b/i.test(permText) || /(employment|work|position) (type|status)[^.\n]{0,40}\bongoing\b|\bongoing (role|position|opportunity|employment|basis|full[- ]time|part[- ]time)|(full|part)[- ]time,?\s*ongoing/i.test(permText);
+  const tempM = permText.match(/\b(temporary|temp (?:role|position|opportunity|full[- ]time|ft)|fixed[- ]term|contract (?:role|position|until|for|of)|maternity (?:leave )?(?:cover|relief)|parental leave (?:cover|backfill)|secondment|casual (?:role|position)|grant[- ]funded|non[- ]ongoing|for (?:a period of )?(?:up to )?\d{1,2} months|until (?:\d{1,2}(?:st|nd|rd|th)? )?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]* 20\d\d)/i);
   if(perm && !tempM) r.checks.push({name:'Permanent & secure', s:'pass', note:'The ad says permanent or ongoing.'});
   else if(perm && tempM) r.checks.push({name:'Permanent & secure', s:'warn', note:`Mentions both permanent/ongoing and “${tempM[0]}”. Ask which this role is.`});
   else if(tempM) r.checks.push({name:'Permanent & secure', s:'fail', note:`Looks non-permanent (“${tempM[0]}”).`});
@@ -1088,7 +1100,8 @@ function importObject(obj){
   const parts = [];
   if(obj.kind === 'next-role-profile' || obj.kind === 'next-role-backup'){
     const p = obj.profile || obj;
-    profile = {pay:p.pay || null, home:p.home || '', areaZones:p.areaZones || null, about:p.about || '', criteria:Array.isArray(p.criteria) ? p.criteria : null, empNotes:p.empNotes || {}};
+    profile = {pay:p.pay || null, home:p.home || '', areaZones:p.areaZones || null, about:p.about || '', criteria:Array.isArray(p.criteria) ? p.criteria : null, empNotes:p.empNotes || {},
+      alerts:(p.alerts && /^[A-Za-z0-9_-]{8,64}$/.test(p.alerts.topic || '')) ? {topic:p.alerts.topic} : (hasProfile() && profile.alerts) || null};
     saveProfile(); parts.push('profile');
   }
   if(Array.isArray(obj.jobs)){ const {added, updated} = mergeJobs(obj.jobs); parts.push(`${added} new role${added === 1 ? '' : 's'}` + (updated ? `, ${updated} updated` : '')); }
@@ -1115,6 +1128,9 @@ function renderSettings(){
   $('#s-base').value = p.base || ''; $('#s-bonus').value = p.bonus ?? ''; $('#s-super').value = p.super ?? '';
   $('#s-home').value = (hasProfile() && profile.home) || '';
   $('#s-about').value = (hasProfile() && profile.about) || '';
+  const topic = hasProfile() && profile.alerts && profile.alerts.topic;
+  $('#s-topic').textContent = topic || 'Import your profile to see it.';
+  $('#s-topic-copy').hidden = !topic;
   const now = packageNow(); $('#s-package').textContent = now ? 'Current package: ' + kf(now) : 'Enter your base, bonus and super to compare packages.';
   $('#s-zones').innerHTML = Object.entries(AREAS).map(([k, [label]]) => {
     const z = zoneOf(k) || '';
@@ -1125,6 +1141,10 @@ function renderSettings(){
   ensureProfile(); profile.pay = {base:Number($('#s-base').value) || 0, bonus:Number($('#s-bonus').value) || 0, super:Number($('#s-super').value) || 0};
   saveProfile(); renderSettings(); renderEverything();
 }));
+$('#s-topic-copy').addEventListener('click', async () => {
+  const t = hasProfile() && profile.alerts && profile.alerts.topic; if(!t) return;
+  try { await navigator.clipboard.writeText(t); toast('Topic copied. Paste it into ntfy.'); } catch { toast('Copy didn’t work. Type the topic into ntfy.'); }
+});
 $('#s-home').addEventListener('change', e => { ensureProfile(); profile.home = e.target.value.trim(); saveProfile(); renderEverything(); });
 $('#s-about').addEventListener('change', e => { ensureProfile(); profile.about = e.target.value.trim(); saveProfile(); });
 $('#s-zones').addEventListener('change', e => {
@@ -1162,7 +1182,9 @@ function handleShared(){
   const banner = $('#shared-banner');
   banner.innerHTML = `<b>Shared from another app</b><span>${body.length < 300 ? 'Most job apps share only the title and link. Open the ad, copy the full text and paste it below to check it, or save it to the tracker now.' : 'Tap “Check this ad”.'}</span><div class="linkrow"><button class="btn small primary" id="sh-save">Save to tracker</button>${link ? `<a class="btn small" href="${esc(link)}" target="_blank" rel="noopener">Open the ad</a>` : ''}</div>`;
   banner.hidden = false;
-  $('#sh-save').addEventListener('click', () => { openForm({title:(title || body.split('\n')[0] || 'Shared role').slice(0, 120), link, status:'shortlist'}); showTab('tracker'); });
+  // job alerts send "Employer · grade · pay" as the text
+  const parts = text.includes(' · ') ? text.split(' · ') : [];
+  $('#sh-save').addEventListener('click', () => { openForm({title:(title || body.split('\n')[0] || 'Shared role').slice(0, 120), employer:parts[0] || '', pay:parts.slice(1).join(' · '), link, status:'shortlist', notes:parts.length ? 'From a job alert.' : ''}); showTab('tracker'); });
   history.replaceState(null, '', location.pathname);
   return true;
 }
